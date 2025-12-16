@@ -1,45 +1,27 @@
-<div class="features">
-  <div class="feature">
-    <h3>⚡ Ultra Fast</h3>
-    <p>Generate AI images in seconds</p>
-  </div>
-  <div class="feature">
-    <h3>🎨 Realistic Styles</h3>
-    <p>Cinematic & ultra-realistic results</p>
-  </div>
-  <div class="feature">
-    <h3>🎬 Image & Video</h3>
-    <p>Create stunning visuals with AI</p>
-  </div>
-</div>      margin-bottom: 15px;
-      border-radius: 8px;
-      border: none;
-      outline: none;
-      font-size: 14px;
-    }
-    button {
-      width: 100%;
-      padding: 12px;
-      background: #00ffd5;
-      color: #000;
-      font-size: 15px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    button:hover {
-      opacity: 0.9;
-    }
-  </style>
-</head>
-<body>
+.features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 20px;
+}
 
-  <div class="box">
-    <h1>PrimeShot AI</h1>
-    <p>Generate stunning AI images & videos</p>
-    <input type="text" placeholder="Describe your image...">
-    <button>Generate</button>
-  </div>
+.feature {
+  background: #111;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid #1f1f1f;
+}
 
-</body>
-</html>
+.feature h3 {
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.feature p {
+  font-size: 12px;
+  color: #b5b5b5;
+}@media (max-width: 600px) {
+  .features {
+    grid-template-columns: 1fr;
+  }
+}
