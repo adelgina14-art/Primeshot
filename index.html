@@ -2,70 +2,43 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Lumera AI Studio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- Premium Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <title>ProductShot AI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
   <style>
-    * {
-      box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
-    }
-
     body {
       margin: 0;
-      background: linear-gradient(180deg, #0e0f13, #15171c);
-      color: #f5f5f5;
-      display: flex;
-      justify-content: center;
-    }
-
-    .app {
-      width: 100%;
-      max-width: 430px;
-      padding: 32px 20px 60px;
-    }
-
-    .logo {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at top, #0f2027, #000);
+      color: #fff;
       text-align: center;
-      font-size: 28px;
-      font-weight: 700;
-      background: linear-gradient(135deg, #a855f7, #00e5c0);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 16px;
+    }
+
+    .container {
+      max-width: 420px;
+      margin: auto;
+      padding: 40px 20px;
     }
 
     h1 {
-      text-align: center;
-      font-size: 34px;
-      margin: 0;
-      font-weight: 700;
+      font-size: 32px;
+      margin-bottom: 8px;
     }
 
-    .subtitle {
-      text-align: center;
-      color: #9ca3af;
-      margin: 12px 0 28px;
-      font-size: 15px;
-      line-height: 1.5;
+    h2 {
+      font-size: 16px;
+      font-weight: 400;
+      color: #aaa;
+      margin-bottom: 30px;
     }
 
     input {
       width: 100%;
       padding: 16px;
-      border-radius: 16px;
-      border: 1px solid #2a2e37;
-      background: #1c1f26;
-      color: #fff;
-      font-size: 15px;
+      border-radius: 14px;
+      border: none;
+      font-size: 16px;
       margin-bottom: 16px;
-    }
-
-    input::placeholder {
-      color: #6b7280;
     }
 
     button {
@@ -73,110 +46,102 @@
       padding: 16px;
       border-radius: 16px;
       border: none;
-      font-size: 16px;
+      font-size: 18px;
       font-weight: 600;
       cursor: pointer;
-      margin-bottom: 14px;
-    }
-
-    .btn-main {
-      background: linear-gradient(135deg, #00e5c0, #4f8cff);
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, #00ffd5, #00c9ff);
       color: #000;
-      box-shadow: 0 12px 30px rgba(0,229,192,0.35);
     }
 
-    .btn-secondary {
-      background: #1f2330;
-      color: #fff;
-      border: 1px solid #2a2e37;
+    .secondary {
+      background: linear-gradient(135deg, #00c9ff, #00ffd5);
     }
 
-    .image-box {
-      margin-top: 24px;
+    .hint {
+      font-size: 13px;
+      color: #aaa;
+      margin-bottom: 30px;
+    }
+
+    img {
       display: none;
+      width: 100%;
+      max-width: 320px;
+      margin: 24px auto;
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     }
 
-    .image-box img {
-      width: 100%;
-      border-radius: 18px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+    .workflow {
+      display: grid;
+      gap: 12px;
+      margin-top: 40px;
     }
 
     .card {
-      margin-top: 22px;
-      padding: 20px;
-      border-radius: 20px;
-      background: linear-gradient(180deg, #161a22, #111318);
-      border: 1px solid #1f2330;
+      background: #0f0f0f;
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05);
+      text-align: left;
     }
 
-    .card h3 {
-      margin: 0 0 6px;
-      font-size: 16px;
-      font-weight: 600;
+    .card span {
+      font-size: 20px;
+      margin-right: 8px;
     }
 
-    .card p {
-      margin: 0;
-      font-size: 13px;
-      color: #9ca3af;
-      line-height: 1.4;
+    footer {
+      margin-top: 50px;
+      font-size: 12px;
+      color: #666;
     }
   </style>
 </head>
 
 <body>
-  <div class="app">
-    <div class="logo">Lumera</div>
+  <div class="container">
+    <h1>ProductShot AI</h1>
+    <h2>AI Product Photography for E-commerce Sellers</h2>
 
-    <h1>Create cinematic AI visuals</h1>
-    <div class="subtitle">
-      Professional images & videos powered by next-gen AI models
+    <input type="text" placeholder="Upload product photo (demo)" />
+    <button id="generateBtn">Generate Preview</button>
+    <button class="secondary">View Pricing</button>
+    <p class="hint">No signup • Instant preview</p>
+
+    <!-- DEMO IMAGE -->
+    <img id="demoImage" />
+
+    <div class="workflow">
+      <div class="card"><span>📤</span>Upload product image</div>
+      <div class="card"><span>🎨</span>Choose studio style</div>
+      <div class="card"><span>⚡</span>Generate AI preview</div>
+      <div class="card"><span>📥</span>Download (Pro users)</div>
     </div>
 
-    <input id="promptInput" placeholder="A cinematic portrait, studio lighting..." />
-
-    <button class="btn-main" id="generateBtn">Generate Preview</button>
-    <button class="btn-secondary">Upgrade Plan</button>
-
-    <div class="image-box" id="imageBox">
-      <img id="demoImage" />
-    </div>
-
-    <div class="card">
-      <h3>Ultra-fast Generation</h3>
-      <p>AI visuals rendered in seconds with optimized pipelines</p>
-    </div>
-
-    <div class="card">
-      <h3>Realistic Styles</h3>
-      <p>Cinematic, product-ready and ultra-realistic results</p>
-    </div>
-
-    <div class="card">
-      <h3>Image & Video Ready</h3>
-      <p>Architecture prepared for image and video AI APIs</p>
-    </div>
+    <footer>
+      Demo version • Built for Flippa listing
+    </footer>
   </div>
 
   <script>
     const demoImages = [
-      "https://picsum.photos/600/600?random=1",
-      "https://picsum.photos/600/600?random=2",
-      "https://picsum.photos/600/600?random=3",
-      "https://picsum.photos/600/600?random=4",
-      "https://picsum.photos/600/600?random=5"
+      "https://picsum.photos/500/500?random=11",
+      "https://picsum.photos/500/500?random=22",
+      "https://picsum.photos/500/500?random=33",
+      "https://picsum.photos/500/500?random=44",
+      "https://picsum.photos/500/500?random=55"
     ];
 
-    const generateBtn = document.getElementById("generateBtn");
-    const demoImage = document.getElementById("demoImage");
-    const imageBox = document.getElementById("imageBox");
+    const btn = document.getElementById("generateBtn");
+    const img = document.getElementById("demoImage");
 
-    generateBtn.addEventListener("click", () => {
-      const randomIndex = Math.floor(Math.random() * demoImages.length);
-      demoImage.src = demoImages[randomIndex];
-      imageBox.style.display = "block";
+    btn.addEventListener("click", () => {
+      const random = Math.floor(Math.random() * demoImages.length);
+      img.src = demoImages[random];
+      img.style.display = "block";
     });
   </script>
 </body>
-    </html>
+</html>
