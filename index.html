@@ -2,42 +2,75 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>ProductShot AI – AI Product Photography</title>
+  <title>PrimeShot AI – AI Product Photography SaaS</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
+    :root {
+      --bg: #0b0f1a;
+      --card: #11162a;
+      --accent: #2dd4ff;
+      --text: #ffffff;
+      --muted: #9aa4bf;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont;
-      background: radial-gradient(circle at top, #0f2027, #000);
-      color: #fff;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(1200px 600px at top, #0f172a, #020617);
+      color: var(--text);
       text-align: center;
     }
 
-    .container {
-      max-width: 420px;
-      margin: auto;
-      padding: 40px 20px;
+    header {
+      padding: 60px 20px 40px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(45,212,255,0.15);
+      color: var(--accent);
+      font-size: 14px;
+      margin-bottom: 16px;
     }
 
     h1 {
-      font-size: 32px;
-      margin-bottom: 10px;
+      font-size: 42px;
+      margin: 10px 0;
+      letter-spacing: -0.5px;
     }
 
     p.subtitle {
-      color: #aaa;
-      font-size: 15px;
-      margin-bottom: 30px;
+      max-width: 520px;
+      margin: 0 auto 30px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.6;
     }
 
-    input {
+    .card {
+      max-width: 420px;
+      margin: 0 auto;
+      background: linear-gradient(180deg, #11162a, #0b1020);
+      border-radius: 20px;
+      padding: 26px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    }
+
+    input[type="file"] {
       width: 100%;
-      padding: 16px;
+      padding: 14px;
       border-radius: 14px;
       border: none;
-      margin-bottom: 15px;
-      font-size: 15px;
+      background: #0b1020;
+      color: var(--muted);
+      margin-bottom: 16px;
     }
 
     button {
@@ -45,165 +78,144 @@
       padding: 16px;
       border-radius: 16px;
       border: none;
-      font-size: 16px;
-      font-weight: bold;
       cursor: pointer;
-      margin-bottom: 14px;
-      background: linear-gradient(90deg, #00f2fe, #4facfe);
-      color: #000;
-    }
-
-    .secondary {
-      background: #111;
-      color: #fff;
-      border: 1px solid #222;
-    }
-
-    .note {
-      font-size: 13px;
-      color: #888;
-      margin-bottom: 30px;
-    }
-
-    .card {
-      background: #0b0b0b;
-      border-radius: 18px;
-      padding: 18px;
-      margin-bottom: 14px;
-      text-align: left;
-      box-shadow: 0 10px 30px rgba(0,0,0,.4);
-    }
-
-    .card h3 {
-      margin: 0 0 6px;
       font-size: 16px;
+      font-weight: 600;
     }
 
-    .card p {
-      margin: 0;
-      font-size: 13px;
-      color: #aaa;
-    }
-
-    #loader {
-      display: none;
-      margin: 20px 0;
-      font-size: 14px;
-      color: #00f2fe;
-    }
-
-    img {
-      width: 100%;
-      border-radius: 18px;
-      margin-top: 20px;
-      display: none;
-      box-shadow: 0 20px 40px rgba(0,0,0,.6);
-    }
-
-    .pricing {
-      margin-top: 40px;
-      text-align: left;
-    }
-
-    .price {
-      background: #111;
-      padding: 16px;
-      border-radius: 16px;
+    .primary {
+      background: linear-gradient(135deg, #22d3ee, #3b82f6);
+      color: #020617;
       margin-bottom: 12px;
     }
 
-    .badge {
-      display: inline-block;
-      background: #00f2fe;
-      color: #000;
-      font-size: 11px;
-      padding: 4px 10px;
-      border-radius: 20px;
-      margin-bottom: 10px;
+    .secondary {
+      background: #020617;
+      color: white;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .note {
+      margin-top: 12px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    img.demo {
+      display: none;
+      width: 100%;
+      border-radius: 18px;
+      margin-top: 22px;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.5);
+    }
+
+    section {
+      padding: 70px 20px;
+    }
+
+    h2 {
+      font-size: 32px;
+      margin-bottom: 30px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .box {
+      background: var(--card);
+      border-radius: 18px;
+      padding: 22px;
+      text-align: left;
+    }
+
+    .box strong {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    footer {
+      padding: 40px 20px;
+      color: var(--muted);
+      font-size: 14px;
     }
   </style>
 </head>
 
 <body>
-  <div class="container">
 
-    <span class="badge">Built for Amazon • Shopify • Etsy</span>
-
-    <h1>ProductShot AI</h1>
+  <header>
+    <div class="badge">Built for Amazon · Shopify · Etsy</div>
+    <h1>PrimeShot AI</h1>
     <p class="subtitle">
-      Turn simple product photos into high-converting studio images
+      Turn simple product photos into studio-quality images that increase clicks and conversions.
+      Built as a ready-to-launch AI SaaS.
     </p>
 
-    <input type="text" placeholder="Upload product photo (demo)" />
-
-    <button id="generateBtn">Create photos that sell</button>
-    <button class="secondary">View Pricing</button>
-
-    <p class="note">No signup • Takes 10 seconds</p>
-
-    <div id="loader">Optimizing lighting… Rendering studio image…</div>
-
-    <img id="resultImage" />
-
     <div class="card">
-      <h3>📦 Upload product image</h3>
-      <p>Use any phone photo – no studio needed</p>
+      <input type="file" disabled value="Upload product photo (demo)" />
+      <button class="primary" id="generateBtn">Create photos that sell</button>
+      <button class="secondary">View Pricing</button>
+      <div class="note">No signup · Takes ~10 seconds</div>
+
+      <img id="demoImage" class="demo" />
     </div>
+  </header>
 
-    <div class="card">
-      <h3>🎨 Choose studio style</h3>
-      <p>Amazon white, luxury black, lifestyle</p>
-    </div>
-
-    <div class="card">
-      <h3>⚡ Generate AI preview</h3>
-      <p>Ready for listings & ads</p>
-    </div>
-
-    <div class="pricing">
-      <h3>Pricing</h3>
-
-      <div class="price">
-        <strong>Starter</strong><br />
-        $9 / month
+  <section>
+    <h2>Why buyers want this</h2>
+    <div class="grid">
+      <div class="box">
+        <strong>High-demand niche</strong>
+        E-commerce sellers constantly need better product images to sell more.
       </div>
-
-      <div class="price">
-        <strong>Pro</strong> ⭐ Most Popular<br />
-        $29 / month
+      <div class="box">
+        <strong>Nim-style UI</strong>
+        Modern dark design inspired by premium AI tools buyers already trust.
       </div>
-
-      <div class="price">
-        <strong>Agency</strong><br />
-        $79 / month
+      <div class="box">
+        <strong>API-ready</strong>
+        Frontend is clean and ready for OpenAI / Stability / Replicate integration.
+      </div>
+      <div class="box">
+        <strong>Fast monetization</strong>
+        Can be launched as subscription or lifetime deal immediately.
       </div>
     </div>
+  </section>
 
-  </div>
+  <section>
+    <h2>What the buyer gets</h2>
+    <div class="grid">
+      <div class="box">✔ Complete SaaS landing page</div>
+      <div class="box">✔ Premium UI / UX</div>
+      <div class="box">✔ Conversion-focused copy</div>
+      <div class="box">✔ Ready for resale or launch</div>
+    </div>
+  </section>
+
+  <footer>
+    PrimeShot AI · AI Product Photography SaaS · Ready for acquisition
+  </footer>
 
   <script>
     const images = [
       "https://picsum.photos/600/600?random=1",
       "https://picsum.photos/600/600?random=2",
-      "https://picsum.photos/600/600?random=3"
+      "https://picsum.photos/600/600?random=3",
+      "https://picsum.photos/600/600?random=4"
     ];
 
-    const btn = document.getElementById("generateBtn");
-    const img = document.getElementById("resultImage");
-    const loader = document.getElementById("loader");
-
-    btn.onclick = () => {
-      img.style.display = "none";
-      loader.style.display = "block";
-
-      setTimeout(() => {
-        const random = images[Math.floor(Math.random() * images.length)];
-        img.src = random;
-        loader.style.display = "none";
-        img.style.display = "block";
-      }, 2500);
-    };
+    document.getElementById("generateBtn").addEventListener("click", () => {
+      const img = document.getElementById("demoImage");
+      img.src = images[Math.floor(Math.random() * images.length)];
+      img.style.display = "block";
+    });
   </script>
 
 </body>
-</html>
+    </html>
