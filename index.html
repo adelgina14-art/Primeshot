@@ -1,147 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>ProductShot AI</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lumera AI</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      background: radial-gradient(circle at top, #0f2027, #000);
-      color: #fff;
-      text-align: center;
-    }
+<style>
+* {
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
 
-    .container {
-      max-width: 420px;
-      margin: auto;
-      padding: 40px 20px;
-    }
+body {
+  margin: 0;
+  background: radial-gradient(circle at top, #111827, #000);
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+}
 
-    h1 {
-      font-size: 32px;
-      margin-bottom: 8px;
-    }
+.container {
+  width: 100%;
+  max-width: 420px;
+  padding: 24px;
+}
 
-    h2 {
-      font-size: 16px;
-      font-weight: 400;
-      color: #aaa;
-      margin-bottom: 30px;
-    }
+.logo {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
+  color: #60a5fa;
+  margin-top: 20px;
+}
 
-    input {
-      width: 100%;
-      padding: 16px;
-      border-radius: 14px;
-      border: none;
-      font-size: 16px;
-      margin-bottom: 16px;
-    }
+h1 {
+  text-align: center;
+  font-size: 32px;
+  line-height: 1.2;
+  margin: 20px 0 10px;
+}
 
-    button {
-      width: 100%;
-      padding: 16px;
-      border-radius: 16px;
-      border: none;
-      font-size: 18px;
-      font-weight: 600;
-      cursor: pointer;
-      margin-bottom: 12px;
-      background: linear-gradient(135deg, #00ffd5, #00c9ff);
-      color: #000;
-    }
+.subtitle {
+  text-align: center;
+  color: #9ca3af;
+  font-size: 15px;
+  margin-bottom: 24px;
+}
 
-    .secondary {
-      background: linear-gradient(135deg, #00c9ff, #00ffd5);
-    }
+input {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: none;
+  outline: none;
+  background: #111827;
+  color: #fff;
+  font-size: 15px;
+  margin-bottom: 14px;
+}
 
-    .hint {
-      font-size: 13px;
-      color: #aaa;
-      margin-bottom: 30px;
-    }
+button {
+  width: 100%;
+  padding: 14px;
+  border-radius: 16px;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
 
-    img {
-      display: none;
-      width: 100%;
-      max-width: 320px;
-      margin: 24px auto;
-      border-radius: 18px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    }
+.primary {
+  background: linear-gradient(90deg, #22d3ee, #3b82f6);
+  color: #000;
+  margin-bottom: 12px;
+}
 
-    .workflow {
-      display: grid;
-      gap: 12px;
-      margin-top: 40px;
-    }
+.secondary {
+  background: #111827;
+  color: #fff;
+  border: 1px solid #1f2937;
+}
 
-    .card {
-      background: #0f0f0f;
-      border-radius: 18px;
-      padding: 18px;
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05);
-      text-align: left;
-    }
+#demoImage {
+  display: none;
+  width: 100%;
+  margin: 20px auto;
+  border-radius: 18px;
+  box-shadow: 0 20px 40px rgba(0,0,0,.6);
+}
 
-    .card span {
-      font-size: 20px;
-      margin-right: 8px;
-    }
+.feature {
+  background: #0b1220;
+  border-radius: 18px;
+  padding: 16px;
+  margin-top: 14px;
+}
 
-    footer {
-      margin-top: 50px;
-      font-size: 12px;
-      color: #666;
-    }
-  </style>
+.feature h3 {
+  margin: 0 0 6px;
+  font-size: 16px;
+}
+
+.feature p {
+  margin: 0;
+  font-size: 14px;
+  color: #9ca3af;
+}
+</style>
 </head>
 
 <body>
-  <div class="container">
-    <h1>ProductShot AI</h1>
-    <h2>AI Product Photography for E-commerce Sellers</h2>
+<div class="container">
 
-    <input type="text" placeholder="Upload product photo (demo)" />
-    <button id="generateBtn">Generate Preview</button>
-    <button class="secondary">View Pricing</button>
-    <p class="hint">No signup • Instant preview</p>
+  <div class="logo">Lumera</div>
 
-    <!-- DEMO IMAGE -->
-    <img id="demoImage" />
+  <h1>Create cinematic<br>AI visuals</h1>
 
-    <div class="workflow">
-      <div class="card"><span>📤</span>Upload product image</div>
-      <div class="card"><span>🎨</span>Choose studio style</div>
-      <div class="card"><span>⚡</span>Generate AI preview</div>
-      <div class="card"><span>📥</span>Download (Pro users)</div>
-    </div>
-
-    <footer>
-      Demo version • Built for Flippa listing
-    </footer>
+  <div class="subtitle">
+    Professional images & videos powered by next-gen AI models
   </div>
 
-  <script>
-    const demoImages = [
-      "https://picsum.photos/500/500?random=11",
-      "https://picsum.photos/500/500?random=22",
-      "https://picsum.photos/500/500?random=33",
-      "https://picsum.photos/500/500?random=44",
-      "https://picsum.photos/500/500?random=55"
-    ];
+  <input type="text" placeholder="A cinematic portrait, studio lighting..." />
 
-    const btn = document.getElementById("generateBtn");
-    const img = document.getElementById("demoImage");
+  <button class="primary" id="generateBtn">Generate Preview</button>
+  <button class="secondary">Upgrade Plan</button>
 
-    btn.addEventListener("click", () => {
-      const random = Math.floor(Math.random() * demoImages.length);
-      img.src = demoImages[random];
-      img.style.display = "block";
-    });
-  </script>
+  <img id="demoImage" />
+
+  <div class="feature">
+    <h3>⚡ Ultra-fast Generation</h3>
+    <p>AI visuals rendered in seconds with optimized pipelines</p>
+  </div>
+
+  <div class="feature">
+    <h3>🎨 Realistic Styles</h3>
+    <p>Cinematic, product-ready and ultra-realistic results</p>
+  </div>
+
+</div>
+
+<script>
+const demoImages = [
+  "https://picsum.photos/600/800?random=1",
+  "https://picsum.photos/600/800?random=2",
+  "https://picsum.photos/600/800?random=3",
+  "https://picsum.photos/600/800?random=4",
+  "https://picsum.photos/600/800?random=5"
+];
+
+document.getElementById("generateBtn").addEventListener("click", () => {
+  const img = document.getElementById("demoImage");
+  img.src = demoImages[Math.floor(Math.random() * demoImages.length)];
+  img.style.display = "block";
+});
+</script>
+
 </body>
 </html>
