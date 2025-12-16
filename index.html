@@ -1,27 +1,120 @@
-.features {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  margin-top: 20px;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PrimeShot AI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-.feature {
-  background: #111;
-  padding: 14px;
-  border-radius: 12px;
-  border: 1px solid #1f1f1f;
-}
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f0f0f;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
 
-.feature h3 {
-  font-size: 14px;
-  margin-bottom: 6px;
-}
+    .box {
+      width: 100%;
+      max-width: 420px;
+      background: #1c1c1c;
+      padding: 24px;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    }
 
-.feature p {
-  font-size: 12px;
-  color: #b5b5b5;
-}@media (max-width: 600px) {
-  .features {
-    grid-template-columns: 1fr;
-  }
-}
+    h1 {
+      margin-bottom: 6px;
+    }
+
+    p.subtitle {
+      color: #aaa;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      margin-bottom: 12px;
+      font-size: 14px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #00ffd5;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .feature {
+      background: #111;
+      padding: 14px;
+      border-radius: 12px;
+      border: 1px solid #1f1f1f;
+    }
+
+    .feature h3 {
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .feature p {
+      font-size: 12px;
+      color: #b5b5b5;
+    }
+
+    @media (max-width: 600px) {
+      .features {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="box">
+    <h1>PrimeShot AI</h1>
+    <p class="subtitle">Generate stunning AI images & videos</p>
+
+    <input type="text" placeholder="Describe your image...">
+    <button>Generate</button>
+
+    <div class="features">
+      <div class="feature">
+        <h3>⚡ Ultra Fast</h3>
+        <p>Generate AI images in seconds</p>
+      </div>
+
+      <div class="feature">
+        <h3>🎨 Realistic Styles</h3>
+        <p>Cinematic & ultra-realistic results</p>
+      </div>
+
+      <div class="feature">
+        <h3>🎬 Image & Video</h3>
+        <p>Create stunning visuals with AI</p>
+      </div>
+    </div>
+  </div>
+
+</body>
+        </html>
