@@ -1,133 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>PrimeShot AI</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- DEMO GENERATED IMAGE -->
+<img
+  id="demoImage"
+  style="
+    display:none;
+    width:100%;
+    max-width:320px;
+    margin:20px auto;
+    border-radius:16px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.4);
+  "
+/>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0e0e0e;
-      color: #ffffff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
+<script>
+  const demoImages = [
+    "https://picsum.photos/500/500?random=1",
+    "https://picsum.photos/500/500?random=2",
+    "https://picsum.photos/500/500?random=3",
+    "https://picsum.photos/500/500?random=4",
+    "https://picsum.photos/500/500?random=5"
+  ];
 
-    .container {
-      width: 100%;
-      max-width: 420px;
-      padding: 24px;
-      text-align: center;
-    }
+  const generateBtn = document.querySelector(".generate-btn");
 
-    h1 {
-      font-size: 32px;
-      margin-bottom: 8px;
-    }
-
-    .subtitle {
-      color: #b5b5b5;
-      margin-bottom: 24px;
-      font-size: 14px;
-    }
-
-    input {
-      width: 100%;
-      padding: 14px;
-      border-radius: 14px;
-      border: none;
-      font-size: 14px;
-      outline: none;
-      margin-bottom: 14px;
-    }
-
-    .generate-btn {
-      width: 100%;
-      padding: 16px;
-      border-radius: 16px;
-      border: none;
-      background: #00ffd5;
-      color: #000;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      margin-bottom: 18px;
-    }
-
-    .pricing-btn {
-      width: 100%;
-      padding: 15px;
-      border-radius: 16px;
-      border: none;
-      background: linear-gradient(135deg, #00ffd5, #00bfa5);
-      color: #000;
-      font-size: 15px;
-      font-weight: bold;
-      cursor: pointer;
-      margin-bottom: 26px;
-    }
-
-    .features {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-    }
-
-    .feature {
-      background: #141414;
-      padding: 16px;
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,0.05);
-    }
-
-    .feature h3 {
-      font-size: 14px;
-      margin-bottom: 6px;
-    }
-
-    .feature p {
-      font-size: 12px;
-      color: #b5b5b5;
-    }
-
-    @media (max-width: 600px) {
-      .features {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
-</head>
-
-<body>
-  <div class="container">
-    <h1>PrimeShot AI</h1>
-    <div class="subtitle">Generate stunning AI images & videos</div>
-
-    <input type="text" placeholder="Describe your image..." />
-    <button class="generate-btn">Generate</button>
-
-    <button class="pricing-btn">View Pricing</button>
-
-    <div class="features">
-      <div class="feature">
-        <h3>⚡ Ultra Fast</h3>
-        <p>Generate AI images in seconds</p>
-      </div>
-
-      <div class="feature">
-        <h3>🎨 Realistic Styles</h3>
-        <p>Cinematic & ultra-realistic results</p>
-      </div>
-
-      <div class="feature">
-        <h3>🎬 Image & Video</h3>
-        <p>Create stunning visuals with AI</p>
-      </div>
-    </div>
-  </div>
-</body>
-</html>
+  if (generateBtn) {
+    generateBtn.addEventListener("click", () => {
+      const img = document.getElementById("demoImage");
+      img.src =
+        demoImages[Math.floor(Math.random() * demoImages.length)];
+      img.style.display = "block";
+    });
+  }
+</script>
