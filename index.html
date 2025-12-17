@@ -1,69 +1,60 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>PrimeShot AI</title>
-</head>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
-<body style="background:#0b0f1a;font-family:sans-serif;color:white">
+<body class="bg-[#050505] text-white font-['Inter'] antialiased">
 
-  <div style="max-width:360px;margin:60px auto;text-align:center">
+  <div class="fixed top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-blue-600/10 blur-[120px] rounded-full pointer-events-none"></div>
 
-    <h2>PrimeShot AI</h2>
-    <p style="color:#aaa;font-size:14px">
-      Turn product photos into high-converting images
-    </p>
-
-    <!-- Upload -->
-    <input type="file" id="uploadInput" accept="image/*"
-      style="margin:15px auto;display:block;color:white" />
-
-    <!-- Button -->
-    <button id="generateBtn"
-      style="width:100%;padding:14px;border-radius:12px;
-      background:#1da1f2;color:white;font-size:16px;border:none">
-      Enhance Image
-    </button>
-
-    <!-- Loading -->
-    <div id="loading" style="display:none;margin:20px;color:#aaa">
-      Enhancing image...
-    </div>
-
-    <!-- Result -->
-    <div id="result" style="display:none;margin-top:20px">
-
-      <p style="font-size:14px;color:#aaa">Before / After</p>
-
-      <div style="display:flex;gap:10px">
-        <img src="https://picsum.photos/300?blur=2"
-          style="width:50%;border-radius:12px" />
-        <img src="https://picsum.photos/300"
-          style="width:50%;border-radius:12px" />
+  <section class="relative pt-20 pb-16 px-6">
+    <div class="max-w-5xl mx-auto text-center">
+      
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-light tracking-widest uppercase text-blue-400 mb-8 backdrop-blur-sm">
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+        </span>
+        Built for Amazon & Shopify
       </div>
 
-      <p style="margin-top:10px;font-size:12px;color:#666">
-        Demo UI – AI Ready
+      <h1 class="text-5xl md:text-7xl font-extrabold tracking-tighter mb-6 bg-clip-text text-transparent bg-gradient-to-b from-white to-white/40">
+        PrimeShot <span class="text-blue-500">AI</span>
+      </h1>
+      
+      <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed font-light">
+        Transform ordinary product snapshots into <span class="text-white font-normal">high-converting studio assets</span> in seconds. No studio needed.
       </p>
+
+      <div class="max-w-xl mx-auto p-1 rounded-2xl bg-gradient-to-b from-white/10 to-transparent shadow-2xl">
+        <div class="bg-[#0A0A0A] rounded-[14px] p-8 border border-white/5">
+          <div class="flex flex-col gap-4">
+            <label class="group cursor-pointer border-2 border-dashed border-white/10 hover:border-blue-500/50 rounded-xl p-10 transition-all duration-300">
+              <input type="file" class="hidden">
+              <div class="flex flex-col items-center">
+                <svg class="w-10 h-10 text-gray-500 group-hover:text-blue-400 mb-4 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                <p class="text-sm text-gray-400 tracking-wide">Drop your product photo here or <span class="text-blue-400">browse</span></p>
+              </div>
+            </label>
+            
+            <button class="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-4 rounded-xl shadow-[0_0_20px_rgba(37,99,235,0.3)] transition-all active:scale-[0.98]">
+              Generate Studio Background
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
+  </section>
 
-  </div>
+  <section class="max-w-4xl mx-auto px-6 pb-24">
+    <div class="grid grid-cols-2 gap-4">
+       <div class="relative group">
+         <span class="absolute top-4 left-4 text-[10px] uppercase tracking-widest bg-black/50 backdrop-blur-md px-2 py-1 rounded border border-white/10 z-10">Original</span>
+         <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=800" class="rounded-2xl border border-white/5 opacity-60 grayscale group-hover:grayscale-0 transition-all duration-700">
+       </div>
+       <div class="relative group">
+         <span class="absolute top-4 left-4 text-[10px] uppercase tracking-widest bg-blue-600/80 backdrop-blur-md px-2 py-1 rounded z-10">AI Enhanced</span>
+         <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=800" class="rounded-2xl border border-blue-500/30 shadow-[0_0_40px_rgba(37,99,235,0.15)] transition-all duration-700">
+       </div>
+    </div>
+  </section>
 
-<script>
-  const btn = document.getElementById("generateBtn");
-  const loading = document.getElementById("loading");
-  const result = document.getElementById("result");
-
-  btn.onclick = () => {
-    loading.style.display = "block";
-    result.style.display = "none";
-
-    setTimeout(() => {
-      loading.style.display = "none";
-      result.style.display = "block";
-    }, 2000);
-  };
-</script>
-
-</body>
-</html>
+    </body>
