@@ -3,127 +3,47 @@
 <head>
   <meta charset="UTF-8" />
   <title>PrimeShot AI</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
   <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: radial-gradient(circle at top, #111, #000);
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       min-height: 100vh;
+      color: #fff;
+      background: #000;
+      overflow-x: hidden;
+    }
+
+    /* خلفية فيديو */
+    .bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2;
+      opacity: 0.35;
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at top, #1a1a2e, #000);
+      z-index: -1;
     }
 
     .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 40px 20px;
       text-align: center;
-      width: 90%;
-      max-width: 600px;
     }
 
     h1 {
-      font-size: 42px;
-      margin-bottom: 10px;
-    }
-
-    p {
-      color: #aaa;
-      margin-bottom: 30px;
-    }
-
-    .box {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-
-    input {
-      flex: 1;
-      padding: 14px;
-      border-radius: 10px;
-      border: none;
-      font-size: 16px;
-    }
-
-    button {
-      padding: 14px 20px;
-      border-radius: 10px;
-      border: none;
-      font-size: 16px;
-      cursor: pointer;
-      background: #6d5cff;
-      color: white;
-    }
-
-    button:hover {
-      opacity: 0.9;
-    }
-
-    img {
-      max-width: 100%;
-      border-radius: 16px;
-      margin-top: 25px;
-      display: none;
-    }
-
-    .loader {
-      margin-top: 20px;
-      display: none;
-      color: #aaa;
-    }
-  </style>
-</head>
-<body>
-
-  <div class="container">
-    <h1>PrimeShot AI</h1>
-    <p>Generate ultra-realistic images powered by AI</p>
-
-    <div class="box">
-      <input id="prompt" placeholder="Describe the image..." />
-      <button onclick="generateImage()">Generate</button>
-    </div>
-
-    <div class="loader" id="loader">Generating image...</div>
-
-    <img id="result" />
-  </div>
-
-  <script>
-    async function generateImage() {
-      const prompt = document.getElementById("prompt").value;
-      const img = document.getElementById("result");
-      const loader = document.getElementById("loader");
-
-      if (!prompt) {
-        alert("Write a prompt first");
-        return;
-      }
-
-      img.style.display = "none";
-      loader.style.display = "block";
-
-      const response = await fetch("/api/generate", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ prompt })
-      });
-
-      const data = await response.json();
-
-      loader.style.display = "none";
-
-      if (data.image) {
-        img.src = "data:image/png;base64," + data.image;
-        img.style.display = "block";
-      } else {
-        alert("Error generating image");
-      }
-    }
-  </script>
-
-</body>
-</html>
+      font-size: 48px;
