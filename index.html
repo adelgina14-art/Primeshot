@@ -1,183 +1,261 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>PrimeShot AI</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <title>PrimeShot AI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Inter}
-body{background:#05070d;color:#fff}
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
 
-/* HEADER */
-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:22px 26px;
-}
-.logo{font-size:22px;font-weight:800}
-.logo span{color:#4da3ff}
+    body {
+      background: radial-gradient(circle at top, #0b1020, #05070d);
+      color: #ffffff;
+      overflow-x: hidden;
+    }
 
-.waitlist{
-padding:12px 24px;
-border-radius:30px;
-border:1px solid rgba(255,255,255,.15);
-background:rgba(255,255,255,.05);
-color:#fff;
-text-decoration:none;
-}
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
-/* HERO */
-.hero{
-padding:80px 20px;
-text-align:center;
-}
-.hero h1{
-font-size:46px;
-font-weight:800;
-}
-.hero span{
-background:linear-gradient(90deg,#4da3ff,#c77dff);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-}
-.hero p{
-max-width:600px;
-margin:20px auto;
-color:#9aa3b2;
-}
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 32px;
+    }
 
-/* MEDIA GRID */
-.media{
-padding:60px 20px;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:20px;
-max-width:1100px;
-margin:auto;
-}
+    .logo {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
 
-.media video,
-.media img{
-width:100%;
-border-radius:22px;
-border:1px solid rgba(255,255,255,.08);
-}
+    .logo span {
+      color: #4da3ff;
+      font-weight: 600;
+    }
 
-/* PRICING */
-.pricing{
-padding:80px 20px;
-display:flex;
-flex-direction:column;
-gap:30px;
-align-items:center;
-}
+    .waitlist-btn {
+      padding: 12px 24px;
+      border-radius: 30px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(10px);
+      font-size: 12px;
+      letter-spacing: 2px;
+      transition: all 0.3s ease;
+    }
 
-.plan{
-width:100%;
-max-width:360px;
-padding:34px;
-border-radius:28px;
-background:rgba(255,255,255,.04);
-border:1px solid rgba(255,255,255,.08);
-text-align:center;
-}
+    .waitlist-btn:hover {
+      background: #4da3ff;
+      color: #000;
+    }
 
-.plan h3{color:#9aa3b2;font-size:14px}
-.price{font-size:44px;font-weight:800;margin:18px 0}
-.price span{font-size:15px;color:#9aa3b2}
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 80px 20px 60px;
+    }
 
-.plan ul{list-style:none;text-align:left;color:#b7c0d1}
-.plan ul li{margin-bottom:10px}
+    .badge {
+      display: inline-block;
+      padding: 8px 18px;
+      border-radius: 20px;
+      background: rgba(77,163,255,0.15);
+      color: #4da3ff;
+      font-size: 11px;
+      letter-spacing: 3px;
+      margin-bottom: 24px;
+    }
 
-.plan button{
-margin-top:25px;
-width:100%;
-padding:14px;
-border-radius:30px;
-border:none;
-background:#4da3ff;
-color:#000;
-font-weight:700;
-cursor:pointer;
-}
+    h1 {
+      font-size: 56px;
+      font-weight: 800;
+      line-height: 1.1;
+    }
 
-.popular{
-border:2px solid #4da3ff;
-}
+    h1 span {
+      background: linear-gradient(90deg, #4da3ff, #b56cff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-footer{
-text-align:center;
-padding:30px;
-color:#6f7a8a;
-font-size:13px;
-}
-</style>
+    .subtitle {
+      margin-top: 24px;
+      color: #9aa4b2;
+      font-size: 18px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Videos */
+    .video-section {
+      padding: 80px 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    video {
+      width: 100%;
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    }
+
+    /* Gallery */
+    .gallery {
+      padding: 60px 20px 100px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .gallery img {
+      width: 100%;
+      border-radius: 24px;
+      transition: transform 0.4s ease;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    }
+
+    .gallery img:hover {
+      transform: scale(1.04);
+    }
+
+    /* Pricing */
+    .pricing {
+      max-width: 1100px;
+      margin: auto;
+      padding: 80px 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+    }
+
+    .plan {
+      background: rgba(255,255,255,0.05);
+      border-radius: 32px;
+      padding: 40px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .plan h3 {
+      font-size: 14px;
+      letter-spacing: 3px;
+      color: #9aa4b2;
+      margin-bottom: 12px;
+    }
+
+    .price {
+      font-size: 48px;
+      font-weight: 800;
+      margin-bottom: 24px;
+    }
+
+    .plan ul {
+      list-style: none;
+      color: #cbd5e1;
+      font-size: 14px;
+      line-height: 2;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: #6b7280;
+      font-size: 12px;
+    }
+  </style>
 </head>
 
 <body>
 
 <header>
   <div class="logo">PRIMESHOT <span>AI</span></div>
-  <a class="waitlist" target="_blank"
-     href="https://docs.google.com/forms/d/e/1FAIpQLSeSZJaMnKu2Qsi4J_w0HGt79LYzC1nY9Ap2M8SaH41Iv8Q5Pg/viewform">
-     JOIN WAITLIST
+  <a
+    class="waitlist-btn"
+    href="https://docs.google.com/forms/d/e/1FAIpQLSeSZJaMnKu2Qsi4J_w0HGt79LYzC1nY9Ap2M8SaH41Iv8Q5Pg/viewform"
+    target="_blank"
+  >
+    JOIN WAITLIST
   </a>
 </header>
 
 <section class="hero">
+  <div class="badge">NEXT-GEN GENERATIVE SUITE</div>
   <h1>Create the <span>Impossible</span></h1>
-  <p>AI-powered image & video generation for brands, creators, and studios.</p>
+  <p class="subtitle">
+    A unified AI engine for studio photography, cinematic video,
+    and high-end visual production. Designed for global brands.
+  </p>
 </section>
 
-<!-- 🔥 MEDIA SECTION -->
-<section class="media">
-
-  <!-- VIDEO 1 -->
+<!-- Videos -->
+<section class="video-section">
   <video autoplay muted loop playsinline>
-    <source src="https://cdn.coverr.co/videos/coverr-cinematic-ai-visuals-7482/1080p.mp4">
+    <source src="https://cdn.coverr.co/videos/coverr-ai-generated-city-7294/1080p.mp4" type="video/mp4">
   </video>
 
-  <!-- IMAGE 1 -->
-  <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1200" alt="AI Image">
-
-  <!-- VIDEO 2 -->
   <video autoplay muted loop playsinline>
-    <source src="https://cdn.coverr.co/videos/coverr-futuristic-interface-5994/1080p.mp4">
+    <source src="https://cdn.coverr.co/videos/coverr-futuristic-ai-face-7985/1080p.mp4" type="video/mp4">
   </video>
 
-  <!-- IMAGE 2 -->
-  <img src="https://images.unsplash.com/photo-1633419461186-7d40a38105ec?q=80&w=1200" alt="AI Visual">
-
+  <video autoplay muted loop playsinline>
+    <source src="https://cdn.coverr.co/videos/coverr-abstract-digital-wave-7418/1080p.mp4" type="video/mp4">
+  </video>
 </section>
 
-<!-- PRICING -->
+<!-- Image Gallery -->
+<section class="gallery">
+  <img src="https://images.lexica.art/full_jpg/7d9f6d52-0f30-4b36-bf5a-f4bfa9d8d89f" />
+  <img src="https://images.lexica.art/full_jpg/1f3c8a9b-8b9f-4e57-9b55-4c63a7c7c8e5" />
+  <img src="https://images.lexica.art/full_jpg/9c1f94d5-3f3c-4dc0-8d0f-b9bde6b3c2fa" />
+  <img src="https://images.lexica.art/full_jpg/4cdb1d3a-7f7c-4e56-b6ad-ffb16a58b6f1" />
+  <img src="https://images.lexica.art/full_jpg/5f6a9b43-7e32-4c1a-8c18-1fcb5a9f1a4a" />
+  <img src="https://images.lexica.art/full_jpg/bc8c1b87-2f6b-41a5-9b3a-98e8f2a4dc21" />
+</section>
+
+<!-- Pricing -->
 <section class="pricing">
-
   <div class="plan">
     <h3>BASIC</h3>
-    <div class="price">$29 <span>/mo</span></div>
-    <button>GET STARTED</button>
-  </div>
-
-  <div class="plan popular">
-    <h3>PRO CREATOR</h3>
-    <div class="price">$89 <span>/mo</span></div>
+    <div class="price">$29<span style="font-size:14px">/mo</span></div>
     <ul>
-      <li>✓ Unlimited AI Images</li>
-      <li>✓ Cinematic AI Videos</li>
-      <li>✓ Commercial License</li>
+      <li>AI Image Generation</li>
+      <li>Studio-Quality Outputs</li>
+      <li>Commercial License</li>
     </ul>
-    <button>GET STARTED</button>
   </div>
 
+  <div class="plan">
+    <h3>PRO CREATOR</h3>
+    <div class="price">$89<span style="font-size:14px">/mo</span></div>
+    <ul>
+      <li>Unlimited 8K AI Photos</li>
+      <li>AI Video Ads (60s)</li>
+      <li>Custom 3D Environments</li>
+    </ul>
+  </div>
 </section>
 
 <footer>
-© 2025 PrimeShot AI
+  © 2025 PrimeShot AI. All rights reserved.
 </footer>
 
 </body>
