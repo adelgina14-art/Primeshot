@@ -3,183 +3,102 @@
 <head>
   <meta charset="UTF-8" />
   <title>PrimeShot AI</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
     }
 
     body {
-      background: radial-gradient(circle at top, #0b1020, #05070d);
+      background: #0b0b0f;
       color: #ffffff;
-      overflow-x: hidden;
+      line-height: 1.6;
     }
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    /* Header */
     header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 24px 32px;
+      padding: 60px 20px;
+      text-align: center;
+      background: radial-gradient(circle at top, #1a1a2e, #0b0b0f);
     }
 
-    .logo {
-      font-size: 22px;
-      font-weight: 800;
+    header h1 {
+      font-size: 42px;
+      margin-bottom: 15px;
       letter-spacing: 1px;
     }
 
-    .logo span {
-      color: #4da3ff;
-      font-weight: 600;
-    }
-
-    .waitlist-btn {
-      padding: 12px 24px;
-      border-radius: 30px;
-      border: 1px solid rgba(255,255,255,0.2);
-      background: rgba(255,255,255,0.05);
-      backdrop-filter: blur(10px);
-      font-size: 12px;
-      letter-spacing: 2px;
-      transition: all 0.3s ease;
-    }
-
-    .waitlist-btn:hover {
-      background: #4da3ff;
-      color: #000;
-    }
-
-    /* Hero */
-    .hero {
-      text-align: center;
-      padding: 80px 20px 60px;
-    }
-
-    .badge {
-      display: inline-block;
-      padding: 8px 18px;
-      border-radius: 20px;
-      background: rgba(77,163,255,0.15);
-      color: #4da3ff;
-      font-size: 11px;
-      letter-spacing: 3px;
-      margin-bottom: 24px;
-    }
-
-    h1 {
-      font-size: 56px;
-      font-weight: 800;
-      line-height: 1.1;
-    }
-
-    h1 span {
-      background: linear-gradient(90deg, #4da3ff, #b56cff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .subtitle {
-      margin-top: 24px;
-      color: #9aa4b2;
+    header p {
+      color: #bdbdbd;
       font-size: 18px;
       max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
+      margin: auto;
     }
 
-    /* Videos */
-    .video-section {
-      padding: 80px 20px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
+    .btn {
+      display: inline-block;
+      margin-top: 25px;
+      padding: 14px 32px;
+      background: linear-gradient(135deg, #5f9cff, #8a63ff);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 40px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      opacity: 0.85;
+    }
+
+    section {
+      padding: 70px 20px;
       max-width: 1200px;
       margin: auto;
     }
 
-    video {
-      width: 100%;
-      border-radius: 24px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    h2 {
+      text-align: center;
+      font-size: 32px;
+      margin-bottom: 40px;
     }
 
-    /* Gallery */
-    .gallery {
-      padding: 60px 20px 100px;
+    .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 24px;
-      max-width: 1200px;
-      margin: auto;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
     }
 
-    .gallery img {
+    .grid img,
+    .grid video {
       width: 100%;
-      border-radius: 24px;
-      transition: transform 0.4s ease;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+      border-radius: 18px;
+      object-fit: cover;
+      background: #111;
     }
 
-    .gallery img:hover {
-      transform: scale(1.04);
-    }
-
-    /* Pricing */
-    .pricing {
-      max-width: 1100px;
-      margin: auto;
-      padding: 80px 20px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 32px;
-    }
-
-    .plan {
-      background: rgba(255,255,255,0.05);
-      border-radius: 32px;
-      padding: 40px;
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .plan h3 {
-      font-size: 14px;
-      letter-spacing: 3px;
-      color: #9aa4b2;
-      margin-bottom: 12px;
-    }
-
-    .price {
-      font-size: 48px;
-      font-weight: 800;
-      margin-bottom: 24px;
-    }
-
-    .plan ul {
+    ul {
+      max-width: 600px;
+      margin: 40px auto 0;
       list-style: none;
-      color: #cbd5e1;
-      font-size: 14px;
-      line-height: 2;
     }
 
-    /* Footer */
+    ul li {
+      padding: 14px 0;
+      border-bottom: 1px solid #222;
+      text-align: center;
+      font-size: 18px;
+    }
+
     footer {
       text-align: center;
       padding: 40px 20px;
-      color: #6b7280;
-      font-size: 12px;
+      color: #777;
+      border-top: 1px solid #222;
+      margin-top: 60px;
     }
   </style>
 </head>
@@ -187,71 +106,72 @@
 <body>
 
 <header>
-  <div class="logo">PRIMESHOT <span>AI</span></div>
+  <h1>PrimeShot AI</h1>
+  <p>
+    Generate hyper-realistic AI photos and cinematic videos for brands,
+    creators, and agencies — without studios or models.
+  </p>
+
   <a
-    class="waitlist-btn"
-    href="https://docs.google.com/forms/d/e/1FAIpQLSeSZJaMnKu2Qsi4J_w0HGt79LYzC1nY9Ap2M8SaH41Iv8Q5Pg/viewform"
+    class="btn"
+    href="https://docs.google.com/forms/d/1XtnTRvNFJOBGWS3CyuKI5QgpaCqfJKNDIbJIhDFgPdY/viewform"
     target="_blank"
   >
-    JOIN WAITLIST
+    Join the Waiting List
   </a>
 </header>
 
-<section class="hero">
-  <div class="badge">NEXT-GEN GENERATIVE SUITE</div>
-  <h1>Create the <span>Impossible</span></h1>
-  <p class="subtitle">
-    A unified AI engine for studio photography, cinematic video,
-    and high-end visual production. Designed for global brands.
-  </p>
-</section>
+<section>
+  <h2>AI Generated Photos</h2>
 
-<!-- Videos -->
-<section class="video-section">
-  <video autoplay muted loop playsinline>
-    <source src="https://cdn.coverr.co/videos/coverr-ai-generated-city-7294/1080p.mp4" type="video/mp4">
-  </video>
-
-  <video autoplay muted loop playsinline>
-    <source src="https://cdn.coverr.co/videos/coverr-futuristic-ai-face-7985/1080p.mp4" type="video/mp4">
-  </video>
-
-  <video autoplay muted loop playsinline>
-    <source src="https://cdn.coverr.co/videos/coverr-abstract-digital-wave-7418/1080p.mp4" type="video/mp4">
-  </video>
-</section>
-
-<!-- Image Gallery -->
-<section class="gallery">
-  <img src="https://images.lexica.art/full_jpg/7d9f6d52-0f30-4b36-bf5a-f4bfa9d8d89f" />
-  <img src="https://images.lexica.art/full_jpg/1f3c8a9b-8b9f-4e57-9b55-4c63a7c7c8e5" />
-  <img src="https://images.lexica.art/full_jpg/9c1f94d5-3f3c-4dc0-8d0f-b9bde6b3c2fa" />
-  <img src="https://images.lexica.art/full_jpg/4cdb1d3a-7f7c-4e56-b6ad-ffb16a58b6f1" />
-  <img src="https://images.lexica.art/full_jpg/5f6a9b43-7e32-4c1a-8c18-1fcb5a9f1a4a" />
-  <img src="https://images.lexica.art/full_jpg/bc8c1b87-2f6b-41a5-9b3a-98e8f2a4dc21" />
-</section>
-
-<!-- Pricing -->
-<section class="pricing">
-  <div class="plan">
-    <h3>BASIC</h3>
-    <div class="price">$29<span style="font-size:14px">/mo</span></div>
-    <ul>
-      <li>AI Image Generation</li>
-      <li>Studio-Quality Outputs</li>
-      <li>Commercial License</li>
-    </ul>
+  <div class="grid">
+    <img src="https://images.unsplash.com/photo-1549880338-65ddcdfd017b" alt="AI Image">
+    <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e" alt="AI Image">
+    <img src="https://images.unsplash.com/photo-1530569673472-307dc017a82d" alt="AI Image">
+    <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee" alt="AI Image">
+    <img src="https://images.unsplash.com/photo-1520975922284-7b958af7e0c0" alt="AI Image">
+    <img src="https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb" alt="AI Image">
   </div>
+</section>
 
-  <div class="plan">
-    <h3>PRO CREATOR</h3>
-    <div class="price">$89<span style="font-size:14px">/mo</span></div>
-    <ul>
-      <li>Unlimited 8K AI Photos</li>
-      <li>AI Video Ads (60s)</li>
-      <li>Custom 3D Environments</li>
-    </ul>
+<section>
+  <h2>AI Video Generation</h2>
+
+  <div class="grid">
+    <video autoplay muted loop playsinline>
+      <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+    </video>
+
+    <video autoplay muted loop playsinline>
+      <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+    </video>
+
+    <video autoplay muted loop playsinline>
+      <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4">
+    </video>
   </div>
+</section>
+
+<section>
+  <h2>What You Get</h2>
+
+  <ul>
+    <li>Unlimited 8K AI Photos</li>
+    <li>AI Video Ads up to 60 seconds</li>
+    <li>Hyper-Realistic Product Scenes</li>
+    <li>Custom 3D Environments</li>
+    <li>Commercial Usage Rights</li>
+  </ul>
+</section>
+
+<section style="text-align:center;">
+  <a
+    class="btn"
+    href="https://docs.google.com/forms/d/1XtnTRvNFJOBGWS3CyuKI5QgpaCqfJKNDIbJIhDFgPdY/viewform"
+    target="_blank"
+  >
+    Get Early Access
+  </a>
 </section>
 
 <footer>
