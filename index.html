@@ -2,184 +2,244 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PrimeShot AI – AI SaaS for Sale</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PrimeShot AI</title>
 
   <style>
-    body {
+    * {
+      box-sizing: border-box;
       margin: 0;
-      font-family: Inter, Arial, sans-serif;
-      background: #0b0b12;
-      color: #ffffff;
-      text-align: center;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #0b1220, #000);
+      color: #fff;
+      overflow-x: hidden;
     }
 
     header {
-      padding: 90px 20px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 32px;
     }
 
-    h1 {
-      font-size: 44px;
-      margin-bottom: 16px;
+    .logo {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 1px;
     }
 
-    p {
-      color: #b5b5c3;
-      font-size: 18px;
-      max-width: 760px;
-      margin: 0 auto 35px;
-      line-height: 1.6;
-    }
-
-    .btn {
-      display: inline-block;
-      background: linear-gradient(135deg, #7f5cff, #5a3dff);
-      color: #fff;
-      padding: 16px 40px;
-      border-radius: 32px;
-      text-decoration: none;
-      font-size: 16px;
+    .logo span {
+      color: #3b82f6;
       font-weight: 600;
-      transition: 0.3s;
+      display: block;
     }
 
-    .btn:hover {
-      opacity: 0.85;
+    .waitlist-btn {
+      padding: 12px 22px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: transparent;
+      color: #fff;
+      cursor: pointer;
     }
 
-    .videos {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 22px;
+    .hero {
+      text-align: center;
+      padding: 80px 20px 40px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 8px 18px;
+      border-radius: 999px;
+      background: rgba(59,130,246,0.15);
+      color: #60a5fa;
+      font-size: 12px;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-size: 56px;
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #3b82f6, #a855f7, #ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      max-width: 600px;
+      margin: auto;
+      opacity: 0.7;
+      font-size: 16px;
+    }
+
+    /* ===== MEDIA SECTION ===== */
+    .media-showcase {
       padding: 70px 20px;
-      max-width: 1100px;
-      margin: auto;
+      text-align: center;
     }
 
-    video {
+    .media-showcase video {
       width: 100%;
-      border-radius: 18px;
-      box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+      max-width: 900px;
+      border-radius: 22px;
+      box-shadow: 0 40px 100px rgba(0,0,0,0.7);
     }
 
-    .section {
+    .image-row {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      margin-top: 36px;
+      flex-wrap: wrap;
+    }
+
+    .image-row img {
+      width: 220px;
+      border-radius: 16px;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .image-row img:nth-child(2) { animation-delay: 1s; }
+    .image-row img:nth-child(3) { animation-delay: 2s; }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-14px); }
+      100% { transform: translateY(0); }
+    }
+
+    /* ===== PRICING ===== */
+    .pricing {
       padding: 80px 20px;
-      max-width: 1100px;
-      margin: auto;
-    }
-
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 30px;
-      margin-top: 50px;
+      display: flex;
+      gap: 28px;
+      justify-content: center;
+      flex-wrap: wrap;
     }
 
     .card {
-      background: #141421;
-      padding: 30px;
-      border-radius: 18px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 28px;
+      padding: 36px;
+      width: 280px;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05);
     }
 
-    .pricing {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 30px;
-      margin-top: 50px;
+    .card h3 {
+      opacity: 0.6;
+      font-size: 14px;
+      margin-bottom: 14px;
     }
 
     .price {
-      font-size: 34px;
-      margin: 20px 0;
-      color: #7f5cff;
+      font-size: 46px;
+      font-weight: 800;
+      margin-bottom: 24px;
+    }
+
+    .price span {
+      font-size: 16px;
+      opacity: 0.5;
+    }
+
+    .card ul {
+      list-style: none;
+      margin-bottom: 26px;
+    }
+
+    .card ul li {
+      margin-bottom: 10px;
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    .card button {
+      width: 100%;
+      padding: 14px;
+      border-radius: 999px;
+      border: none;
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .featured {
+      border: 1px solid rgba(59,130,246,0.5);
+      background: linear-gradient(180deg, rgba(59,130,246,0.12), rgba(0,0,0,0));
     }
 
     footer {
+      text-align: center;
       padding: 40px 20px;
-      font-size: 14px;
-      color: #777;
+      opacity: 0.4;
+      font-size: 12px;
     }
+
   </style>
 </head>
 
 <body>
 
-  <!-- HERO -->
-  <header>
-    <h1>PrimeShot AI</h1>
-    <p>
-      A premium AI SaaS concept designed for cinematic image & video generation.
-      Built as a high-conversion frontend with pricing, waitlist, and scalable
-      architecture — ready for acquisition.
-    </p>
+<header>
+  <div class="logo">
+    PRIMESHOT
+    <span>AI</span>
+  </div>
+  <button class="waitlist-btn">JOIN WAITLIST</button>
+</header>
 
-    <a
-      class="btn"
-      href="https://docs.google.com/forms/d/e/1FAIpQLSeSZJaMnKu2Qsi4J_w0HGt79LYzC1nY9Ap2M8SaH41Iv8Q5Pg/viewform"
-      target="_blank"
-    >
-      Join Early Access
-    </a>
-  </header>
+<section class="hero">
+  <div class="badge">NEXT-GEN GENERATIVE SUITE</div>
+  <h1>Create the <span class="gradient-text">Impossible</span></h1>
+  <p>
+    A unified AI engine for studio photography, cinematic video,
+    and 3D motion. Designed for global brands.
+  </p>
+</section>
 
-  <!-- DEMO VIDEOS -->
-  <section class="videos">
-    <video autoplay muted loop playsinline>
-      <source src="https://cdn.coverr.co/videos/coverr-ai-generated-woman-0864/1080p.mp4" type="video/mp4">
-    </video>
+<section class="media-showcase">
+  <video autoplay muted loop playsinline>
+    <source src="https://cdn.coverr.co/videos/coverr-ai-generated-woman-0864/1080p.mp4" type="video/mp4">
+  </video>
 
-    <video autoplay muted loop playsinline>
-      <source src="https://cdn.coverr.co/videos/coverr-futuristic-city-1080p.mp4" type="video/mp4">
-    </video>
+  <div class="image-row">
+    <img src="https://images.unsplash.com/photo-1633113215888-0c9f63b6a3a5" />
+    <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09" />
+    <img src="https://images.unsplash.com/photo-1605379399642-870262d3d051" />
+  </div>
+</section>
 
-    <video autoplay muted loop playsinline>
-      <source src="https://cdn.coverr.co/videos/coverr-robotic-face-9186/1080p.mp4" type="video/mp4">
-    </video>
-  </section>
+<section class="pricing">
+  <div class="card">
+    <h3>BASIC</h3>
+    <div class="price">$29 <span>/mo</span></div>
+    <button>Get Started</button>
+  </div>
 
-  <!-- FEATURES -->
-  <section class="section">
-    <h2>Why PrimeShot AI?</h2>
+  <div class="card featured">
+    <h3>PRO CREATOR</h3>
+    <div class="price">$89 <span>/mo</span></div>
+    <ul>
+      <li>✓ Unlimited 8K AI Photos</li>
+      <li>✓ AI Video Ads (60s)</li>
+      <li>✓ Custom 3D Environments</li>
+    </ul>
+    <button>Get Started</button>
+  </div>
+</section>
 
-    <div class="features">
-      <div class="card">High-end AI SaaS UI (Dark Mode)</div>
-      <div class="card">Conversion-optimized landing page</div>
-      <div class="card">Integrated waitlist system</div>
-      <div class="card">Ready for AI model integration</div>
-      <div class="card">Built for scale & monetization</div>
-      <div class="card">Perfect for acquisition or MVP launch</div>
-    </div>
-  </section>
-
-  <!-- PRICING -->
-  <section class="section">
-    <h2>Planned Pricing Model</h2>
-
-    <div class="pricing">
-      <div class="card">
-        <h3>Starter</h3>
-        <div class="price">$29</div>
-        <p>Basic AI generations</p>
-      </div>
-
-      <div class="card">
-        <h3>Pro</h3>
-        <div class="price">$89</div>
-        <p>Advanced cinematic outputs</p>
-      </div>
-
-      <div class="card">
-        <h3>Enterprise</h3>
-        <div class="price">Custom</div>
-        <p>API access & custom workflows</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    © 2025 PrimeShot AI — SaaS Concept Project for Sale
-  </footer>
+<footer>
+  © 2025 PrimeShot AI. All rights reserved.
+</footer>
 
 </body>
 </html>
