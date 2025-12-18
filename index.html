@@ -2,124 +2,103 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>PrimeShot AI</title>
+  <title>PrimeShot AI – Early Access</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- Tailwind CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
     body {
-      background: radial-gradient(circle at top, #0b1220, #000);
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #0b0b0f;
+      color: #ffffff;
+      text-align: center;
     }
 
-    .glass {
-      background: rgba(255, 255, 255, 0.04);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255,255,255,0.08);
+    header {
+      padding: 80px 20px 40px;
     }
 
-    .waitlist-btn {
-      text-decoration: none;
+    h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 18px;
+      color: #cccccc;
+      max-width: 700px;
+      margin: 0 auto 40px;
+    }
+
+    .video-wrapper {
+      max-width: 900px;
+      margin: 0 auto 50px;
+      padding: 0 20px;
+    }
+
+    video {
+      width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+    }
+
+    .cta-button {
       display: inline-block;
+      padding: 16px 36px;
+      font-size: 18px;
+      background: linear-gradient(135deg, #7f5af0, #2cb67d);
+      color: #ffffff;
+      text-decoration: none;
+      border-radius: 40px;
+      font-weight: bold;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(127,90,240,0.5);
+    }
+
+    footer {
+      margin-top: 80px;
+      padding: 30px 20px;
+      font-size: 14px;
+      color: #777;
     }
   </style>
 </head>
 
-<body class="text-white overflow-x-hidden">
+<body>
 
-  <!-- NAV -->
-  <nav class="flex items-center justify-between px-6 py-6 max-w-7xl mx-auto">
-    <div class="text-xl font-bold tracking-wide">
-      PRIMESHOT <span class="text-blue-400">AI</span>
-    </div>
-
-    <a
-      href="https://docs.google.com/forms/d/e/1FAIpQLSeSZJaMnKu2Qsi4J_w0HGt79LYzC1nY9Ap2M8SaH41Iv8Q5Pg/viewform"
-      target="_blank"
-      class="waitlist-btn glass px-6 py-3 rounded-full text-sm font-semibold hover:bg-white hover:text-black transition"
-    >
-      JOIN WAITLIST
-    </a>
-  </nav>
-
-  <!-- HERO -->
-  <section class="max-w-7xl mx-auto px-6 pt-20 text-center">
-    <div class="inline-block glass px-6 py-2 rounded-full text-xs tracking-widest mb-6">
-      NEXT-GEN GENERATIVE SUITE
-    </div>
-
-    <h1 class="text-5xl md:text-7xl font-extrabold leading-tight">
-      Create the <br />
-      <span class="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-        Impossible
-      </span>
-    </h1>
-
-    <p class="text-gray-400 max-w-xl mx-auto mt-6">
-      A unified AI engine for studio photography, cinematic video, and 3D motion.
-      Designed for global brands.
+  <header>
+    <h1>Create the Impossible</h1>
+    <p>
+      PrimeShot AI is a next-generation creative platform for generating
+      premium-quality visuals for brands, creators, and e-commerce.
+      Join early access and be the first to experience it.
     </p>
-  </section>
+  </header>
 
-  <!-- VIDEO SECTION -->
-  <section class="max-w-6xl mx-auto px-6 mt-20">
-    <div class="glass rounded-3xl overflow-hidden shadow-2xl">
-      <video
-        autoplay
-        muted
-        loop
-        playsinline
-        class="w-full h-full object-cover"
-      >
-        <source src="https://cdn.coverr.co/videos/coverr-working-on-a-computer-9715/1080p.mp4" type="video/mp4">
-      </video>
-    </div>
-  </section>
+  <div class="video-wrapper">
+    <!-- فيديو حقيقي شغال -->
+    <video autoplay muted loop playsinline>
+      <source src="https://cdn.coverr.co/videos/coverr-working-on-a-laptop-9711/1080p.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
 
-  <!-- PRICING -->
-  <section class="max-w-6xl mx-auto px-6 mt-24 grid md:grid-cols-2 gap-8">
+  <!-- زرار الـ Waiting List -->
+  <a
+    class="cta-button"
+    href="https://docs.google.com/forms/d/e/1FAIpQLSeSZJaMnKu2Qsi4J_w0HGt79LYzC1nY9Ap2M8SaH41Iv8Q5Pg/viewform"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    Join the Waiting List
+  </a>
 
-    <!-- BASIC -->
-    <div class="glass rounded-3xl p-10 text-center opacity-60">
-      <p class="uppercase text-xs tracking-widest mb-4">Basic</p>
-      <h2 class="text-4xl font-bold">$29<span class="text-sm">/mo</span></h2>
-
-      <button class="mt-8 px-8 py-3 rounded-full glass text-sm uppercase tracking-widest">
-        Get Started
-      </button>
-    </div>
-
-    <!-- PRO -->
-    <div class="glass rounded-3xl p-10 border border-blue-500 relative">
-      <span class="absolute -top-4 left-1/2 -translate-x-1/2 bg-blue-500 px-4 py-1 rounded-full text-xs font-bold">
-        MOST WANTED
-      </span>
-
-      <p class="uppercase text-xs tracking-widest mb-4">Pro Creator</p>
-      <h2 class="text-5xl font-extrabold mb-6">$89<span class="text-sm">/mo</span></h2>
-
-      <ul class="space-y-3 text-gray-300 text-sm mb-8">
-        <li>✔ Unlimited 8K AI Photos</li>
-        <li>✔ AI Video Ads (60s)</li>
-        <li>✔ Custom 3D Environments</li>
-      </ul>
-
-      <a
-        href="https://docs.google.com/forms/d/e/1FAIpQLSeSZJaMnKu2Qsi4J_w0HGt79LYzC1nY9Ap2M8SaH41Iv8Q5Pg/viewform"
-        target="_blank"
-        class="waitlist-btn block text-center px-8 py-4 rounded-full bg-blue-500 hover:bg-blue-600 font-semibold transition"
-      >
-        JOIN WAITLIST
-      </a>
-    </div>
-
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="text-center text-gray-500 text-xs py-20">
-    © 2025 PrimeShot AI. All rights reserved.
+  <footer>
+    © 2025 PrimeShot AI — Early Access
   </footer>
 
 </body>
