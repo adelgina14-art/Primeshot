@@ -47,3 +47,147 @@
 
     h1 {
       font-size: 48px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      opacity: 0.85;
+      margin-bottom: 30px;
+    }
+
+    .input-box {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    input {
+      flex: 1;
+      padding: 15px;
+      border-radius: 10px;
+      border: none;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 15px 22px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .generate-btn {
+      background: linear-gradient(135deg, #7b5cff, #4a90e2);
+      color: #fff;
+    }
+
+    .waiting-btn {
+      margin-top: 20px;
+      background: transparent;
+      border: 2px solid #7b5cff;
+      color: #fff;
+    }
+
+    .result {
+      margin-top: 30px;
+    }
+
+    .result img {
+      max-width: 100%;
+      border-radius: 14px;
+      margin-top: 15px;
+      box-shadow: 0 20px 50px rgba(0,0,0,.6);
+    }
+
+    .gallery {
+      margin-top: 60px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .gallery img {
+      width: 100%;
+      border-radius: 14px;
+    }
+
+    footer {
+      margin-top: 60px;
+      opacity: .5;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- فيديو الخلفية -->
+  <video class="bg-video" autoplay muted loop>
+    <source src="https://cdn.coverr.co/videos/coverr-abstract-light-motion-9716/1080p.mp4" type="video/mp4">
+  </video>
+  <div class="overlay"></div>
+
+  <div class="container">
+    <h1>PrimeShot AI</h1>
+    <p>Generate ultra-realistic images powered by AI</p>
+
+    <div class="input-box">
+      <input id="prompt" placeholder="A cinematic portrait of a woman..." />
+      <button class="generate-btn" onclick="generateImage()">Generate</button>
+    </div>
+
+    <div class="result" id="result"></div>
+
+    <!-- زرار الفورم فقط -->
+    <button
+      class="waiting-btn"
+      onclick="window.open('https://docs.google.com/forms/d/1XtnTRvNFJOBGWS3CyuKI5QgpaCqfJKNDIbJIhDFgPdY/edit','_blank')">
+      Join Waiting List
+    </button>
+
+    <!-- جاليري صور -->
+    <div class="gallery">
+      <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2" />
+      <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e" />
+      <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d" />
+      <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9" />
+    </div>
+
+    <footer>© 2025 PrimeShot AI</footer>
+  </div>
+
+  <script>
+    async function generateImage() {
+      const prompt = document.getElementById("prompt").value;
+      const result = document.getElementById("result");
+
+      if (!prompt) {
+        alert("اكتبي وصف الصورة الأول");
+        return;
+      }
+
+      result.innerHTML = "⏳ Generating...";
+
+      try {
+        const res = await fetch("/api/generate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ prompt })
+        });
+
+        const data = await res.json();
+
+        if (data.image) {
+          result.innerHTML = `<img src="${data.image}" />`;
+        } else {
+          result.innerHTML = "❌ حصل خطأ في التوليد";
+        }
+      } catch (e) {
+        result.innerHTML = "❌ Error";
+      }
+    }
+  </script>
+
+</body>
+</html>
