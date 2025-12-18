@@ -2,244 +2,125 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PrimeShot AI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Inter', sans-serif;
-    }
-
     body {
       background: radial-gradient(circle at top, #0b1220, #000);
-      color: #fff;
-      overflow-x: hidden;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 24px 32px;
-    }
-
-    .logo {
-      font-size: 22px;
-      font-weight: 800;
-      letter-spacing: 1px;
-    }
-
-    .logo span {
-      color: #3b82f6;
-      font-weight: 600;
-      display: block;
+    .glass {
+      background: rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.08);
     }
 
     .waitlist-btn {
-      padding: 12px 22px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.2);
-      background: transparent;
-      color: #fff;
-      cursor: pointer;
-    }
-
-    .hero {
-      text-align: center;
-      padding: 80px 20px 40px;
-    }
-
-    .badge {
+      text-decoration: none;
       display: inline-block;
-      padding: 8px 18px;
-      border-radius: 999px;
-      background: rgba(59,130,246,0.15);
-      color: #60a5fa;
-      font-size: 12px;
-      margin-bottom: 24px;
     }
-
-    .hero h1 {
-      font-size: 56px;
-      line-height: 1.1;
-      margin-bottom: 24px;
-    }
-
-    .gradient-text {
-      background: linear-gradient(90deg, #3b82f6, #a855f7, #ec4899);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero p {
-      max-width: 600px;
-      margin: auto;
-      opacity: 0.7;
-      font-size: 16px;
-    }
-
-    /* ===== MEDIA SECTION ===== */
-    .media-showcase {
-      padding: 70px 20px;
-      text-align: center;
-    }
-
-    .media-showcase video {
-      width: 100%;
-      max-width: 900px;
-      border-radius: 22px;
-      box-shadow: 0 40px 100px rgba(0,0,0,0.7);
-    }
-
-    .image-row {
-      display: flex;
-      justify-content: center;
-      gap: 18px;
-      margin-top: 36px;
-      flex-wrap: wrap;
-    }
-
-    .image-row img {
-      width: 220px;
-      border-radius: 16px;
-      animation: float 4s ease-in-out infinite;
-    }
-
-    .image-row img:nth-child(2) { animation-delay: 1s; }
-    .image-row img:nth-child(3) { animation-delay: 2s; }
-
-    @keyframes float {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-14px); }
-      100% { transform: translateY(0); }
-    }
-
-    /* ===== PRICING ===== */
-    .pricing {
-      padding: 80px 20px;
-      display: flex;
-      gap: 28px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .card {
-      background: rgba(255,255,255,0.03);
-      border-radius: 28px;
-      padding: 36px;
-      width: 280px;
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05);
-    }
-
-    .card h3 {
-      opacity: 0.6;
-      font-size: 14px;
-      margin-bottom: 14px;
-    }
-
-    .price {
-      font-size: 46px;
-      font-weight: 800;
-      margin-bottom: 24px;
-    }
-
-    .price span {
-      font-size: 16px;
-      opacity: 0.5;
-    }
-
-    .card ul {
-      list-style: none;
-      margin-bottom: 26px;
-    }
-
-    .card ul li {
-      margin-bottom: 10px;
-      font-size: 14px;
-      opacity: 0.8;
-    }
-
-    .card button {
-      width: 100%;
-      padding: 14px;
-      border-radius: 999px;
-      border: none;
-      background: rgba(255,255,255,0.08);
-      color: #fff;
-      cursor: pointer;
-    }
-
-    .featured {
-      border: 1px solid rgba(59,130,246,0.5);
-      background: linear-gradient(180deg, rgba(59,130,246,0.12), rgba(0,0,0,0));
-    }
-
-    footer {
-      text-align: center;
-      padding: 40px 20px;
-      opacity: 0.4;
-      font-size: 12px;
-    }
-
   </style>
 </head>
 
-<body>
+<body class="text-white overflow-x-hidden">
 
-<header>
-  <div class="logo">
-    PRIMESHOT
-    <span>AI</span>
-  </div>
-  <button class="waitlist-btn">JOIN WAITLIST</button>
-</header>
+  <!-- NAV -->
+  <nav class="flex items-center justify-between px-6 py-6 max-w-7xl mx-auto">
+    <div class="text-xl font-bold tracking-wide">
+      PRIMESHOT <span class="text-blue-400">AI</span>
+    </div>
 
-<section class="hero">
-  <div class="badge">NEXT-GEN GENERATIVE SUITE</div>
-  <h1>Create the <span class="gradient-text">Impossible</span></h1>
-  <p>
-    A unified AI engine for studio photography, cinematic video,
-    and 3D motion. Designed for global brands.
-  </p>
-</section>
+    <a
+      href="https://docs.google.com/forms/d/e/1FAIpQLSeSZJaMnKu2Qsi4J_w0HGt79LYzC1nY9Ap2M8SaH41Iv8Q5Pg/viewform"
+      target="_blank"
+      class="waitlist-btn glass px-6 py-3 rounded-full text-sm font-semibold hover:bg-white hover:text-black transition"
+    >
+      JOIN WAITLIST
+    </a>
+  </nav>
 
-<section class="media-showcase">
-  <video autoplay muted loop playsinline>
-    <source src="https://cdn.coverr.co/videos/coverr-ai-generated-woman-0864/1080p.mp4" type="video/mp4">
-  </video>
+  <!-- HERO -->
+  <section class="max-w-7xl mx-auto px-6 pt-20 text-center">
+    <div class="inline-block glass px-6 py-2 rounded-full text-xs tracking-widest mb-6">
+      NEXT-GEN GENERATIVE SUITE
+    </div>
 
-  <div class="image-row">
-    <img src="https://images.unsplash.com/photo-1633113215888-0c9f63b6a3a5" />
-    <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09" />
-    <img src="https://images.unsplash.com/photo-1605379399642-870262d3d051" />
-  </div>
-</section>
+    <h1 class="text-5xl md:text-7xl font-extrabold leading-tight">
+      Create the <br />
+      <span class="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+        Impossible
+      </span>
+    </h1>
 
-<section class="pricing">
-  <div class="card">
-    <h3>BASIC</h3>
-    <div class="price">$29 <span>/mo</span></div>
-    <button>Get Started</button>
-  </div>
+    <p class="text-gray-400 max-w-xl mx-auto mt-6">
+      A unified AI engine for studio photography, cinematic video, and 3D motion.
+      Designed for global brands.
+    </p>
+  </section>
 
-  <div class="card featured">
-    <h3>PRO CREATOR</h3>
-    <div class="price">$89 <span>/mo</span></div>
-    <ul>
-      <li>✓ Unlimited 8K AI Photos</li>
-      <li>✓ AI Video Ads (60s)</li>
-      <li>✓ Custom 3D Environments</li>
-    </ul>
-    <button>Get Started</button>
-  </div>
-</section>
+  <!-- VIDEO SECTION -->
+  <section class="max-w-6xl mx-auto px-6 mt-20">
+    <div class="glass rounded-3xl overflow-hidden shadow-2xl">
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        class="w-full h-full object-cover"
+      >
+        <source src="https://cdn.coverr.co/videos/coverr-working-on-a-computer-9715/1080p.mp4" type="video/mp4">
+      </video>
+    </div>
+  </section>
 
-<footer>
-  © 2025 PrimeShot AI. All rights reserved.
-</footer>
+  <!-- PRICING -->
+  <section class="max-w-6xl mx-auto px-6 mt-24 grid md:grid-cols-2 gap-8">
+
+    <!-- BASIC -->
+    <div class="glass rounded-3xl p-10 text-center opacity-60">
+      <p class="uppercase text-xs tracking-widest mb-4">Basic</p>
+      <h2 class="text-4xl font-bold">$29<span class="text-sm">/mo</span></h2>
+
+      <button class="mt-8 px-8 py-3 rounded-full glass text-sm uppercase tracking-widest">
+        Get Started
+      </button>
+    </div>
+
+    <!-- PRO -->
+    <div class="glass rounded-3xl p-10 border border-blue-500 relative">
+      <span class="absolute -top-4 left-1/2 -translate-x-1/2 bg-blue-500 px-4 py-1 rounded-full text-xs font-bold">
+        MOST WANTED
+      </span>
+
+      <p class="uppercase text-xs tracking-widest mb-4">Pro Creator</p>
+      <h2 class="text-5xl font-extrabold mb-6">$89<span class="text-sm">/mo</span></h2>
+
+      <ul class="space-y-3 text-gray-300 text-sm mb-8">
+        <li>✔ Unlimited 8K AI Photos</li>
+        <li>✔ AI Video Ads (60s)</li>
+        <li>✔ Custom 3D Environments</li>
+      </ul>
+
+      <a
+        href="https://docs.google.com/forms/d/e/1FAIpQLSeSZJaMnKu2Qsi4J_w0HGt79LYzC1nY9Ap2M8SaH41Iv8Q5Pg/viewform"
+        target="_blank"
+        class="waitlist-btn block text-center px-8 py-4 rounded-full bg-blue-500 hover:bg-blue-600 font-semibold transition"
+      >
+        JOIN WAITLIST
+      </a>
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="text-center text-gray-500 text-xs py-20">
+    © 2025 PrimeShot AI. All rights reserved.
+  </footer>
 
 </body>
 </html>
