@@ -3,37 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <title>PrimeShot AI</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    * {
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
-
     body {
       margin: 0;
-      min-height: 100vh;
-      background: linear-gradient(-45deg, #0f0f0f, #1a1a1a, #111, #000);
-      background-size: 400% 400%;
-      animation: bg 12s ease infinite;
+      font-family: Arial, sans-serif;
+      background: radial-gradient(circle at top, #111, #000);
       color: white;
       display: flex;
-      align-items: center;
       justify-content: center;
-    }
-
-    @keyframes bg {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+      align-items: center;
+      min-height: 100vh;
     }
 
     .container {
-      width: 100%;
-      max-width: 900px;
-      padding: 40px 20px;
       text-align: center;
+      width: 90%;
+      max-width: 600px;
     }
 
     h1 {
@@ -42,145 +28,101 @@
     }
 
     p {
-      opacity: 0.8;
+      color: #aaa;
       margin-bottom: 30px;
     }
 
-    .input-box {
-      width: 100%;
-      max-width: 600px;
-      margin: auto;
+    .box {
       display: flex;
       gap: 10px;
+      margin-bottom: 20px;
     }
 
     input {
       flex: 1;
       padding: 14px;
-      border-radius: 8px;
+      border-radius: 10px;
       border: none;
-      outline: none;
       font-size: 16px;
     }
 
     button {
-      padding: 14px 22px;
-      border-radius: 8px;
+      padding: 14px 20px;
+      border-radius: 10px;
       border: none;
-      background: #6c5ce7;
-      color: white;
       font-size: 16px;
       cursor: pointer;
+      background: #6d5cff;
+      color: white;
     }
 
-    button:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
+    button:hover {
+      opacity: 0.9;
     }
 
-    .result {
-      margin-top: 30px;
-    }
-
-    .result img {
+    img {
       max-width: 100%;
       border-radius: 16px;
-      margin-top: 20px;
-    }
-
-    .actions {
       margin-top: 25px;
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      flex-wrap: wrap;
+      display: none;
     }
 
-    .form-btn {
-      background: transparent;
-      border: 1px solid #6c5ce7;
-    }
-
-    footer {
-      margin-top: 40px;
-      opacity: 0.5;
-      font-size: 14px;
+    .loader {
+      margin-top: 20px;
+      display: none;
+      color: #aaa;
     }
   </style>
 </head>
-
 <body>
 
   <div class="container">
     <h1>PrimeShot AI</h1>
     <p>Generate ultra-realistic images powered by AI</p>
 
-    <div class="input-box">
-      <input
-        id="prompt"
-        type="text"
-        placeholder="A cinematic portrait of a woman, ultra realistic, 8k"
-      />
-      <button id="generateBtn">Generate</button>
+    <div class="box">
+      <input id="prompt" placeholder="Describe the image..." />
+      <button onclick="generateImage()">Generate</button>
     </div>
 
-    <div class="result" id="result"></div>
+    <div class="loader" id="loader">Generating image...</div>
 
-    <div class="actions">
-      <a
-        href="https://docs.google.com/forms/d/1XtnTRvNFJOBGWS3CyuKI5QgpaCqfJKNDIbJIhDFgPdY/viewform"
-        target="_blank"
-      >
-        <button class="form-btn">Join Waiting List</button>
-      </a>
-    </div>
-
-    <footer>
-      © 2025 PrimeShot AI
-    </footer>
+    <img id="result" />
   </div>
 
   <script>
-    const btn = document.getElementById("generateBtn");
-    const promptInput = document.getElementById("prompt");
-    const result = document.getElementById("result");
-
-    btn.addEventListener("click", async () => {
-      const prompt = promptInput.value.trim();
+    async function generateImage() {
+      const prompt = document.getElementById("prompt").value;
+      const img = document.getElementById("result");
+      const loader = document.getElementById("loader");
 
       if (!prompt) {
-        alert("Please enter a prompt");
+        alert("Write a prompt first");
         return;
       }
 
-      btn.disabled = true;
-      btn.innerText = "Generating...";
+      img.style.display = "none";
+      loader.style.display = "block";
 
-      try {
-        const res = await fetch("/api/generate", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ prompt })
-        });
+      const response = await fetch("/api/generate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ prompt })
+      });
 
-        const data = await res.json();
+      const data = await response.json();
 
-        if (data.image) {
-          result.innerHTML = `
-            <img src="data:image/png;base64,${data.image}" />
-          `;
-        } else {
-          alert("Generation failed");
-        }
-      } catch (e) {
-        alert("Server error");
+      loader.style.display = "none";
+
+      if (data.image) {
+        img.src = "data:image/png;base64," + data.image;
+        img.style.display = "block";
+      } else {
+        alert("Error generating image");
       }
-
-      btn.disabled = false;
-      btn.innerText = "Generate";
-    });
+    }
   </script>
 
 </body>
