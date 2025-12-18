@@ -3,180 +3,185 @@
 <head>
   <meta charset="UTF-8" />
   <title>PrimeShot AI</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
     * {
-      margin: 0;
-      padding: 0;
       box-sizing: border-box;
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: 'Poppins', sans-serif;
     }
 
     body {
-      background: #0b0b0f;
-      color: #ffffff;
-      line-height: 1.6;
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(-45deg, #0f0f0f, #1a1a1a, #111, #000);
+      background-size: 400% 400%;
+      animation: bg 12s ease infinite;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    header {
-      padding: 60px 20px;
-      text-align: center;
-      background: radial-gradient(circle at top, #1a1a2e, #0b0b0f);
+    @keyframes bg {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
-    header h1 {
-      font-size: 42px;
-      margin-bottom: 15px;
-      letter-spacing: 1px;
-    }
-
-    header p {
-      color: #bdbdbd;
-      font-size: 18px;
-      max-width: 700px;
-      margin: auto;
-    }
-
-    .btn {
-      display: inline-block;
-      margin-top: 25px;
-      padding: 14px 32px;
-      background: linear-gradient(135deg, #5f9cff, #8a63ff);
-      color: #fff;
-      text-decoration: none;
-      border-radius: 40px;
-      font-weight: bold;
-      transition: 0.3s;
-    }
-
-    .btn:hover {
-      opacity: 0.85;
-    }
-
-    section {
-      padding: 70px 20px;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    h2 {
-      text-align: center;
-      font-size: 32px;
-      margin-bottom: 40px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
-
-    .grid img,
-    .grid video {
+    .container {
       width: 100%;
-      border-radius: 18px;
-      object-fit: cover;
-      background: #111;
-    }
-
-    ul {
-      max-width: 600px;
-      margin: 40px auto 0;
-      list-style: none;
-    }
-
-    ul li {
-      padding: 14px 0;
-      border-bottom: 1px solid #222;
+      max-width: 900px;
+      padding: 40px 20px;
       text-align: center;
-      font-size: 18px;
+    }
+
+    h1 {
+      font-size: 42px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      opacity: 0.8;
+      margin-bottom: 30px;
+    }
+
+    .input-box {
+      width: 100%;
+      max-width: 600px;
+      margin: auto;
+      display: flex;
+      gap: 10px;
+    }
+
+    input {
+      flex: 1;
+      padding: 14px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 14px 22px;
+      border-radius: 8px;
+      border: none;
+      background: #6c5ce7;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .result {
+      margin-top: 30px;
+    }
+
+    .result img {
+      max-width: 100%;
+      border-radius: 16px;
+      margin-top: 20px;
+    }
+
+    .actions {
+      margin-top: 25px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .form-btn {
+      background: transparent;
+      border: 1px solid #6c5ce7;
     }
 
     footer {
-      text-align: center;
-      padding: 40px 20px;
-      color: #777;
-      border-top: 1px solid #222;
-      margin-top: 60px;
+      margin-top: 40px;
+      opacity: 0.5;
+      font-size: 14px;
     }
   </style>
 </head>
 
 <body>
 
-<header>
-  <h1>PrimeShot AI</h1>
-  <p>
-    Generate hyper-realistic AI photos and cinematic videos for brands,
-    creators, and agencies — without studios or models.
-  </p>
+  <div class="container">
+    <h1>PrimeShot AI</h1>
+    <p>Generate ultra-realistic images powered by AI</p>
 
-  <a
-    class="btn"
-    href="https://docs.google.com/forms/d/1XtnTRvNFJOBGWS3CyuKI5QgpaCqfJKNDIbJIhDFgPdY/viewform"
-    target="_blank"
-  >
-    Join the Waiting List
-  </a>
-</header>
+    <div class="input-box">
+      <input
+        id="prompt"
+        type="text"
+        placeholder="A cinematic portrait of a woman, ultra realistic, 8k"
+      />
+      <button id="generateBtn">Generate</button>
+    </div>
 
-<section>
-  <h2>AI Generated Photos</h2>
+    <div class="result" id="result"></div>
 
-  <div class="grid">
-    <img src="https://images.unsplash.com/photo-1549880338-65ddcdfd017b" alt="AI Image">
-    <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e" alt="AI Image">
-    <img src="https://images.unsplash.com/photo-1530569673472-307dc017a82d" alt="AI Image">
-    <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee" alt="AI Image">
-    <img src="https://images.unsplash.com/photo-1520975922284-7b958af7e0c0" alt="AI Image">
-    <img src="https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb" alt="AI Image">
+    <div class="actions">
+      <a
+        href="https://docs.google.com/forms/d/1XtnTRvNFJOBGWS3CyuKI5QgpaCqfJKNDIbJIhDFgPdY/viewform"
+        target="_blank"
+      >
+        <button class="form-btn">Join Waiting List</button>
+      </a>
+    </div>
+
+    <footer>
+      © 2025 PrimeShot AI
+    </footer>
   </div>
-</section>
 
-<section>
-  <h2>AI Video Generation</h2>
+  <script>
+    const btn = document.getElementById("generateBtn");
+    const promptInput = document.getElementById("prompt");
+    const result = document.getElementById("result");
 
-  <div class="grid">
-    <video autoplay muted loop playsinline>
-      <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-    </video>
+    btn.addEventListener("click", async () => {
+      const prompt = promptInput.value.trim();
 
-    <video autoplay muted loop playsinline>
-      <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
-    </video>
+      if (!prompt) {
+        alert("Please enter a prompt");
+        return;
+      }
 
-    <video autoplay muted loop playsinline>
-      <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4">
-    </video>
-  </div>
-</section>
+      btn.disabled = true;
+      btn.innerText = "Generating...";
 
-<section>
-  <h2>What You Get</h2>
+      try {
+        const res = await fetch("/api/generate", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ prompt })
+        });
 
-  <ul>
-    <li>Unlimited 8K AI Photos</li>
-    <li>AI Video Ads up to 60 seconds</li>
-    <li>Hyper-Realistic Product Scenes</li>
-    <li>Custom 3D Environments</li>
-    <li>Commercial Usage Rights</li>
-  </ul>
-</section>
+        const data = await res.json();
 
-<section style="text-align:center;">
-  <a
-    class="btn"
-    href="https://docs.google.com/forms/d/1XtnTRvNFJOBGWS3CyuKI5QgpaCqfJKNDIbJIhDFgPdY/viewform"
-    target="_blank"
-  >
-    Get Early Access
-  </a>
-</section>
+        if (data.image) {
+          result.innerHTML = `
+            <img src="data:image/png;base64,${data.image}" />
+          `;
+        } else {
+          alert("Generation failed");
+        }
+      } catch (e) {
+        alert("Server error");
+      }
 
-<footer>
-  © 2025 PrimeShot AI. All rights reserved.
-</footer>
+      btn.disabled = false;
+      btn.innerText = "Generate";
+    });
+  </script>
 
 </body>
 </html>
