@@ -1,12 +1,9 @@
-export const config = { runtime: 'edge' };
+export default async function handler(req, res) {
+  if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
 
-export default async function handler(req) {
-  if (req.method !== "POST") return new Response("Method not allowed", { status: 405 });
+  const { prompt } = req.body;
 
   try {
-    const { prompt } = await req.json();
-
-    // استخدمنا هنا الرابط الخاص بـ v1 لأنه أكثر استقراراً مع طلبات الـ JSON البسيطة
     const response = await fetch(
       "https://api.stability.ai/v1/generation/stable-diffusion-v1-6/text-to-image",
       {
@@ -30,16 +27,13 @@ export default async function handler(req) {
     const result = await response.json();
 
     if (!response.ok) {
-      // هذا السطر سيطبع في الـ Logs سبب الرفض (مثلاً: invalid_api_key)
-      console.error("STABILITY_ERROR_LOG:", JSON.stringify(result));
-      return new Response(JSON.stringify({ error: result.message || "فشل التوليد" }), { status: response.status });
+      console.error("API Error:", result);
+      return res.status(response.status).json({ error: result.message || "خطأ من المصدر" });
     }
 
-    // ملاحظة: v1 يعيد الصورة داخل مصفوفة artifacts
-    const base64Image = result.artifacts[0].base64;
-    return new Response(JSON.stringify({ image: base64Image }), { status: 200 });
+    res.status(200).json({ image: result.artifacts[0].base64 });
 
   } catch (error) {
-    return new Response(JSON.stringify({ error: error.message }), { status: 500 });
+    res.status(500).json({ error: error.message });
   }
-  }
+}
