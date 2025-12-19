@@ -6,18 +6,14 @@ export default async function handler(req, res) {
   try {
     const { prompt } = req.body;
 
-    if (!prompt) {
-      return res.status(400).json({ error: "Prompt is required" });
-    }
-
     const response = await fetch(
       "https://api.stability.ai/v1/generation/stable-diffusion-v1-6/text-to-image",
       {
         method: "POST",
         headers: {
+          "Authorization": `Bearer ${process.env.STABILITY_API_KEY}`,
           "Content-Type": "application/json",
-          "Accept": "application/json",
-          "Authorization": `Bearer ${process.env.STABILITY_API_KEY}`
+          "Accept": "application/json"
         },
         body: JSON.stringify({
           text_prompts: [{ text: prompt }],
@@ -32,15 +28,15 @@ export default async function handler(req, res) {
 
     const data = await response.json();
 
-    if (!response.ok) {
-      return res.status(500).json({ error: data });
+    if (!data.artifacts || !data.artifacts[0]) {
+      return res.status(500).json({ error: "No image returned" });
     }
 
     res.status(200).json({
-      image: data.artifacts[0].base64
+      image: `data:image/png;base64,${data.artifacts[0].base64}`
     });
 
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
-      }
+}
