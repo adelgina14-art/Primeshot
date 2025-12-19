@@ -1,52 +1,45 @@
-export const config = {
-  runtime: 'edge',
-};
+export const config = { runtime: 'edge' };
 
 export default async function handler(req) {
-  if (req.method !== "POST") {
-    return new Response(JSON.stringify({ error: "Method not allowed" }), { status: 405 });
-  }
+  if (req.method !== "POST") return new Response("Method not allowed", { status: 405 });
 
   try {
     const { prompt } = await req.json();
 
-    if (!prompt) {
-      return new Response(JSON.stringify({ error: "الرجاء كتابة وصف للصورة" }), { status: 400 });
-    }
-
-    // إعداد البيانات بصيغة FormData لأنها الأكثر توافقاً مع v2beta/core
-    const formData = new FormData();
-    formData.append("prompt", prompt);
-    formData.append("output_format", "webp"); // الـ webp أسرع وأخف في التوليد للتجربة
-
+    // استخدمنا هنا الرابط الخاص بـ v1 لأنه أكثر استقراراً مع طلبات الـ JSON البسيطة
     const response = await fetch(
-      "https://api.stability.ai/v2beta/stable-image/generate/core",
+      "https://api.stability.ai/v1/generation/stable-diffusion-v1-6/text-to-image",
       {
         method: "POST",
         headers: {
-          "Authorization": `Bearer ${process.env.STABILITY_API_KEY}`,
+          "Content-Type": "application/json",
           "Accept": "application/json",
+          "Authorization": `Bearer ${process.env.STABILITY_API_KEY}`,
         },
-        body: formData,
+        body: JSON.stringify({
+          text_prompts: [{ text: prompt }],
+          cfg_scale: 7,
+          height: 512,
+          width: 512,
+          steps: 30,
+          samples: 1,
+        }),
       }
     );
 
-    const data = await response.json();
+    const result = await response.json();
 
     if (!response.ok) {
-      // طباعة الخطأ في الـ Logs لنعرف السبب (رصيد، مفتاح، أو وصف ممنوع)
-      console.error("Stability Error:", data);
-      return new Response(JSON.stringify({ 
-        error: data.errors ? data.errors[0] : "فشل التوليد من المصدر" 
-      }), { status: response.status });
+      // هذا السطر سيطبع في الـ Logs سبب الرفض (مثلاً: invalid_api_key)
+      console.error("STABILITY_ERROR_LOG:", JSON.stringify(result));
+      return new Response(JSON.stringify({ error: result.message || "فشل التوليد" }), { status: response.status });
     }
 
-    return new Response(JSON.stringify({ image: data.image }), {
-      status: 200,
-      headers: { 'Content-Type': 'application/json' }
-    });
+    // ملاحظة: v1 يعيد الصورة داخل مصفوفة artifacts
+    const base64Image = result.artifacts[0].base64;
+    return new Response(JSON.stringify({ image: base64Image }), { status: 200 });
 
   } catch (error) {
-    return new Response(JSON.stringify({ error: "خطأ في الاتصال: " + error.message }), { status: 500 });
+    return new Response(JSON.stringify({ error: error.message }), { status: 500 });
   }
-                                        }
+  }
