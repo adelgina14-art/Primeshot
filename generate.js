@@ -1,5 +1,5 @@
 export const config = {
-  runtime: 'edge', // هذا السطر يسمح للدالة بالعمل لفترة أطول من 10 ثوانٍ
+  runtime: 'edge',
 };
 
 export default async function handler(req) {
@@ -11,8 +11,13 @@ export default async function handler(req) {
     const { prompt } = await req.json();
 
     if (!prompt) {
-      return new Response(JSON.stringify({ error: "Prompt is required" }), { status: 400 });
+      return new Response(JSON.stringify({ error: "الرجاء كتابة وصف للصورة" }), { status: 400 });
     }
+
+    // إعداد البيانات بصيغة FormData لأنها الأكثر توافقاً مع v2beta/core
+    const formData = new FormData();
+    formData.append("prompt", prompt);
+    formData.append("output_format", "webp"); // الـ webp أسرع وأخف في التوليد للتجربة
 
     const response = await fetch(
       "https://api.stability.ai/v2beta/stable-image/generate/core",
@@ -21,27 +26,27 @@ export default async function handler(req) {
         headers: {
           "Authorization": `Bearer ${process.env.STABILITY_API_KEY}`,
           "Accept": "application/json",
-          "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          prompt: prompt,
-          output_format: "png",
-        }),
+        body: formData,
       }
     );
 
-    const result = await response.json();
+    const data = await response.json();
 
     if (!response.ok) {
-      return new Response(JSON.stringify({ error: result.errors || "Stability AI Error" }), { status: response.status });
+      // طباعة الخطأ في الـ Logs لنعرف السبب (رصيد، مفتاح، أو وصف ممنوع)
+      console.error("Stability Error:", data);
+      return new Response(JSON.stringify({ 
+        error: data.errors ? data.errors[0] : "فشل التوليد من المصدر" 
+      }), { status: response.status });
     }
 
-    return new Response(JSON.stringify({ image: result.image }), {
+    return new Response(JSON.stringify({ image: data.image }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' }
     });
 
   } catch (error) {
-    return new Response(JSON.stringify({ error: error.message }), { status: 500 });
+    return new Response(JSON.stringify({ error: "خطأ في الاتصال: " + error.message }), { status: 500 });
   }
-}
+                                        }
