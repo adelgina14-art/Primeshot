@@ -11,30 +11,40 @@ export default async function handler(req, res) {
     }
 
     const response = await fetch(
-      "https://api.stability.ai/v2beta/stable-image/generate/core",
+      "https://api.stability.ai/v1/generation/stable-diffusion-v1-6/text-to-image",
       {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${process.env.STABILITY_API_KEY}`,
-          Accept: "application/json"
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          "Authorization": `Bearer ${process.env.STABILITY_API_KEY}`,
         },
-        body: new FormData(
-          Object.entries({
-            prompt,
-            output_format: "png"
-          })
-        )
+        body: JSON.stringify({
+          text_prompts: [
+            { text: prompt }
+          ],
+          cfg_scale: 7,
+          height: 512,
+          width: 512,
+          steps: 30,
+          samples: 1
+        }),
       }
     );
 
-    const result = await response.json();
+    const data = await response.json();
 
     if (!response.ok) {
-      return res.status(500).json({ error: result });
+      return res.status(500).json({ error: data });
     }
 
-    res.status(200).json({ image: result.image });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+    const imageBase64 = data.artifacts[0].base64;
+
+    res.status(200).json({
+      image: `data:image/png;base64,${imageBase64}`,
+    });
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 }
