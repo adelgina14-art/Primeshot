@@ -2,6 +2,9 @@ export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
 
   const { prompt } = req.body;
+  const apiKey = process.env.STABILITY_API_KEY;
+
+  if (!apiKey) return res.status(500).json({ error: "Missing API Key" });
 
   try {
     const response = await fetch(
@@ -11,7 +14,7 @@ export default async function handler(req, res) {
         headers: {
           "Content-Type": "application/json",
           "Accept": "application/json",
-          "Authorization": `Bearer ${process.env.STABILITY_API_KEY}`,
+          "Authorization": `Bearer ${apiKey.trim()}`,
         },
         body: JSON.stringify({
           text_prompts: [{ text: prompt }],
@@ -27,13 +30,13 @@ export default async function handler(req, res) {
     const result = await response.json();
 
     if (!response.ok) {
-      console.error("API Error:", result);
-      return res.status(response.status).json({ error: result.message || "خطأ من المصدر" });
+      // سيظهر لكِ السبب الحقيقي للخطأ في المتصفح الآن
+      return res.status(response.status).json({ error: result.message || "خطأ من Stability AI" });
     }
 
     res.status(200).json({ image: result.artifacts[0].base64 });
 
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ error: "Internal Server Error: " + error.message });
   }
 }
