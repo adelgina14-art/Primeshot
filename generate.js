@@ -17,18 +17,16 @@ export default async function handler(req, res) {
         headers: {
           "Content-Type": "application/json",
           "Accept": "application/json",
-          "Authorization": `Bearer ${process.env.STABILITY_API_KEY}`,
+          "Authorization": `Bearer ${process.env.STABILITY_API_KEY}`
         },
         body: JSON.stringify({
-          text_prompts: [
-            { text: prompt }
-          ],
+          text_prompts: [{ text: prompt }],
           cfg_scale: 7,
           height: 512,
           width: 512,
-          steps: 30,
-          samples: 1
-        }),
+          samples: 1,
+          steps: 30
+        })
       }
     );
 
@@ -38,13 +36,11 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: data });
     }
 
-    const imageBase64 = data.artifacts[0].base64;
-
     res.status(200).json({
-      image: `data:image/png;base64,${imageBase64}`,
+      image: data.artifacts[0].base64
     });
 
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
-}
+      }
