@@ -1,35 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>PrimeShot</title>
+<meta charset="UTF-8">
+<title>PrimeShot AI</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(120deg, #020617, #020024, #020617);
+  background-size: 400% 400%;
+  animation: bg 12s ease infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+@keyframes bg {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.card {
+  width: 420px;
+  padding: 28px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 40px rgba(0,0,0,0.6);
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+p {
+  font-size: 14px;
+  opacity: 0.7;
+  margin-bottom: 18px;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  margin-bottom: 14px;
+  background: rgba(255,255,255,0.1);
+  color: white;
+}
+
+input::placeholder {
+  color: #aaa;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  font-weight: bold;
+  background: linear-gradient(90deg, #38bdf8, #818cf8);
+  color: #020617;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: scale(1.03);
+}
+
+img {
+  width: 100%;
+  margin-top: 18px;
+  border-radius: 12px;
+  display: none;
+}
+</style>
 </head>
+
 <body>
 
-  <h2>Image Generator</h2>
+<div class="card">
+  <h1>PrimeShot AI</h1>
+  <p>Generate cinematic AI images instantly</p>
 
-  <input id="prompt" placeholder="اكتبي الوصف هنا" style="width:300px" />
-  <button onclick="generate()">Generate</button>
+  <input id="prompt" placeholder="Describe your image..." />
+  <button type="button" onclick="generate()">Generate</button>
 
-  <br><br>
-  <img id="result" width="512"/>
+  <img id="result" />
+</div>
 
-  <script>
-    async function generate() {
-      const prompt = document.getElementById("prompt").value;
+<script>
+async function generate() {
+  const prompt = document.getElementById("prompt").value;
+  if (!prompt) return alert("اكتبي وصف الأول");
 
-      const res = await fetch("/api/generate", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ prompt })
-      });
+  const btn = document.querySelector("button");
+  btn.innerText = "Generating...";
+  btn.disabled = true;
 
-      const data = await res.json();
-      document.getElementById("result").src = data.image;
-    }
-  </script>
+  const res = await fetch("/api/generate", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ prompt })
+  });
+
+  const data = await res.json();
+
+  const img = document.getElementById("result");
+  img.src = data.image;
+  img.style.display = "block";
+
+  btn.innerText = "Generate";
+  btn.disabled = false;
+}
+</script>
 
 </body>
 </html>
