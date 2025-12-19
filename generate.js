@@ -1,16 +1,19 @@
-export default async function handler(req, res) {
+export const config = {
+  runtime: 'edge', // هذا السطر يسمح للدالة بالعمل لفترة أطول من 10 ثوانٍ
+};
+
+export default async function handler(req) {
   if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
+    return new Response(JSON.stringify({ error: "Method not allowed" }), { status: 405 });
   }
 
   try {
-    const { prompt } = req.body;
+    const { prompt } = await req.json();
 
     if (!prompt) {
-      return res.status(400).json({ error: "Prompt is required" });
+      return new Response(JSON.stringify({ error: "Prompt is required" }), { status: 400 });
     }
 
-    // استخدام الـ JSON بدلاً من FormData لضمان الاستقرار على Vercel
     const response = await fetch(
       "https://api.stability.ai/v2beta/stable-image/generate/core",
       {
@@ -18,7 +21,7 @@ export default async function handler(req, res) {
         headers: {
           "Authorization": `Bearer ${process.env.STABILITY_API_KEY}`,
           "Accept": "application/json",
-          "Content-Type": "application/json", // أضفنا هذا السطر
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           prompt: prompt,
@@ -27,23 +30,18 @@ export default async function handler(req, res) {
       }
     );
 
-    if (!response.ok) {
-      const errorData = await response.json().catch(() => ({})); 
-      console.error("Stability AI Error:", errorData);
-      return res.status(response.status).json({ 
-        error: errorData.message || "فشل الاتصال بمزود الصور" 
-      });
-    }
-
     const result = await response.json();
 
-    // تأكدي أن الـ Frontend يتوقع 'image' بصيغة Base64
-    res.status(200).json({
-      image: result.image 
+    if (!response.ok) {
+      return new Response(JSON.stringify({ error: result.errors || "Stability AI Error" }), { status: response.status });
+    }
+
+    return new Response(JSON.stringify({ image: result.image }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' }
     });
 
   } catch (error) {
-    console.error("Runtime Error:", error.message);
-    res.status(500).json({ error: "حدث خطأ داخلي في السيرفر" });
+    return new Response(JSON.stringify({ error: error.message }), { status: 500 });
   }
 }
