@@ -1,131 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <title>PrimeShot</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: radial-gradient(circle at top, #1b1b2f, #0f0f1a);
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
-
-    .app {
-      width: 100%;
-      max-width: 600px;
-      background: rgba(255,255,255,0.05);
-      backdrop-filter: blur(12px);
-      border-radius: 20px;
-      padding: 30px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-      text-align: center;
-    }
-
-    h1 {
-      margin-bottom: 10px;
-      font-size: 28px;
-    }
-
-    p {
-      opacity: 0.8;
-      font-size: 14px;
-      margin-bottom: 20px;
-    }
-
-    input {
-      width: 100%;
-      padding: 14px;
-      border-radius: 12px;
-      border: none;
-      outline: none;
-      font-size: 16px;
-      margin-bottom: 15px;
-    }
-
-    button {
-      width: 100%;
-      padding: 14px;
-      border-radius: 12px;
-      border: none;
-      background: linear-gradient(135deg, #7f5cff, #5b8cff);
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    button:hover {
-      opacity: 0.9;
-    }
-
-    img {
-      margin-top: 20px;
-      width: 100%;
-      border-radius: 16px;
-      display: none;
-    }
-
-    .loading {
-      margin-top: 15px;
-      font-size: 14px;
-      opacity: 0.7;
-      display: none;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrimeShot AI - مولد الصور</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
+<body class="bg-gray-900 text-white min-h-screen flex flex-col items-center justify-center p-4">
+    <div class="max-w-md w-full text-center space-y-6">
+        <h1 class="text-4xl font-bold text-purple-500">PrimeShot AI</h1>
+        <p class="text-gray-400">حول كلماتك إلى صور واقعية مذهلة</p>
+        
+        <div class="space-y-4">
+            <input id="promptInput" type="text" placeholder="اكتب وصف الصورة هنا..." 
+                class="w-full p-3 rounded bg-gray-800 border border-gray-700 focus:outline-none focus:border-purple-500">
+            
+            <button onclick="generateImage()" id="genBtn"
+                class="w-full bg-purple-600 hover:bg-purple-700 p-3 rounded font-bold transition">
+                توليد الصورة
+            </button>
+        </div>
 
-<body>
+        <div id="resultContainer" class="mt-6 hidden">
+            <img id="outputImage" class="w-full rounded-lg shadow-2xl border border-gray-700" src="" alt="Generated Image">
+        </div>
 
-  <div class="app">
-    <h1>PrimeShot</h1>
-    <p>Describe the image you want to generate</p>
+        <p id="statusMsg" class="text-sm text-red-400 hidden"></p>
+    </div>
 
-    <input id="prompt" placeholder="اكتبي الوصف هنا..." />
-    <button onclick="generate()">Generate Image</button>
+    <script>
+        async function generateImage() {
+            const prompt = document.getElementById('promptInput').value;
+            const btn = document.getElementById('genBtn');
+            const msg = document.getElementById('statusMsg');
+            const imgContainer = document.getElementById('resultContainer');
+            const outputImg = document.getElementById('outputImage');
 
-    <div class="loading" id="loading">⏳ Generating image...</div>
-    <img id="result" />
-  </div>
+            if (!prompt) return alert("يرجى كتابة وصف");
 
-  <script>
-    async function generate() {
-      const prompt = document.getElementById("prompt").value;
-      const img = document.getElementById("result");
-      const loading = document.getElementById("loading");
+            btn.disabled = true;
+            btn.innerText = "جاري التوليد...";
+            msg.classList.add('hidden');
 
-      if (!prompt) {
-        alert("اكتبي وصف الأول");
-        return;
-      }
+            try {
+                const response = await fetch('/api/generate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ prompt })
+                });
 
-      img.style.display = "none";
-      loading.style.display = "block";
+                const data = await response.json();
 
-      try {
-        const res = await fetch("/api/generate", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ prompt })
-        });
-
-        const data = await res.json();
-
-        img.src = data.image;
-        img.style.display = "block";
-      } catch (e) {
-        alert("حصل خطأ في توليد الصورة");
-      }
-
-      loading.style.display = "none";
-    }
-  </script>
-
+                if (response.ok) {
+                    outputImg.src = `data:image/png;base64,${data.image}`;
+                    imgContainer.classList.remove('hidden');
+                } else {
+                    msg.innerText = "خطأ: " + (data.error || "فشل التوليد");
+                    msg.classList.remove('hidden');
+                }
+            } catch (err) {
+                msg.innerText = "حدث خطأ في الاتصال";
+                msg.classList.remove('hidden');
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "توليد الصورة";
+            }
+        }
+    </script>
 </body>
 </html>
